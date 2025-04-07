@@ -1,0 +1,67 @@
+.
+├── Dockerfile
+├── Gemfile
+├── Gemfile.lock
+├── README.md
+├── Rakefile
+├── app
+│   ├── channels
+│   │   └── application_cable
+│   │       ├── channel.rb
+│   │       └── connection.rb
+│   ├── controllers
+│   │   ├── api
+│   │   │   └── v1
+│   │   │       └── example_controller.rb
+│   │   ├── application_controller.rb
+│   │   └── concerns
+│   ├── jobs
+│   │   └── application_job.rb
+│   ├── mailers
+│   │   └── application_mailer.rb
+│   ├── models
+│   │   ├── application_record.rb
+│   │   └── concerns
+│   └── views
+│       ├── api
+│       │   └── v1
+│       │       └── example
+│       │           └── index.json.jbuilder
+│       └── layouts
+│           ├── mailer.html.erb
+│           └── mailer.text.erb
+├── bin
+│   ├── docker-entrypoint
+│   ├── rails
+│   ├── rake
+│   └── setup
+├── config
+│   ├── application.rb
+│   ├── boot.rb
+│   ├── cable.yml
+│   ├── credentials.yml.enc
+│   ├── database.yml
+│   ├── environment.rb
+│   ├── environments
+│   │   ├── development.rb
+│   │   ├── production.rb
+│   │   └── test.rb
+│   ├── initializers
+│   │   ├── cors.rb
+│   │   ├── filter_parameter_logging.rb
+│   │   └── inflections.rb
+│   ├── locales
+│   │   └── en.yml
+│   ├── master.key
+│   ├── puma.rb
+│   ├── routes.rb
+│   └── storage.yml
+├── config.ru
+├── db
+│   ├── schema.rb
+│   └── seeds.rb
+├── lib
+│   └── tasks
+└── server_tree.txt
+
+24 directories, 40 files

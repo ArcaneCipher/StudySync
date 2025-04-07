@@ -1,0 +1,49 @@
+client
+├── README.md
+├── client_tree.txt
+├── eslint.config.js
+├── index.html
+├── package-lock.json
+├── package.json
+├── public
+│   └── vite.svg
+├── src
+│   ├── App.jsx
+│   ├── api
+│   │   └── axios.js
+│   ├── assets
+│   │   └── react.svg
+│   ├── components
+│   │   ├── Button.jsx
+│   │   └── Layout
+│   │       ├── Footer.jsx
+│   │       ├── Header.jsx
+│   │       └── Layout.jsx
+│   ├── hooks
+│   │   └── useExample.js
+│   ├── main.jsx
+│   ├── pages
+│   │   └── HomePage.jsx
+│   ├── styles
+│   │   ├── base
+│   │   │   ├── _globals.scss
+│   │   │   ├── _reset.scss
+│   │   │   └── _typography.scss
+│   │   ├── components
+│   │   │   ├── _app.scss
+│   │   │   └── _buttons.scss
+│   │   ├── layouts
+│   │   │   ├── _footer.scss
+│   │   │   ├── _grid.scss
+│   │   │   ├── _header.scss
+│   │   │   └── _layout.scss
+│   │   ├── main.scss
+│   │   ├── pages
+│   │   │   └── _home.scss
+│   │   └── utils
+│   │       └── _variables.scss
+│   └── utils
+│       └── helpers.js
+└── vite.config.js
+
+15 directories, 31 files

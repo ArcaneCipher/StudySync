@@ -258,3 +258,384 @@ These are structured using the standard format:
 ### **AI Flashcard Generation**
 
 - As a user, I want the app to suggest flashcards based on my notes or reflections, so I can save time and focus on learning.
+
+---
+
+## Proposed Backend Routes
+
+We'll use **Rails API conventions**, keeping it RESTful wherever possible.
+
+---
+
+### **MVP API Routes – StudySync**
+
+#### **Authentication / Sessions**
+
+|Verb|Route|Purpose|
+|---|---|---|
+|POST|`/signup`|Create new user account|
+|POST|`/login`|Authenticate user & start session|
+|DELETE|`/logout`|End user session (client-side token clearance)|
+|GET|`/me`|Get current logged-in user info|
+
+---
+
+#### **Users**
+
+|Verb|Route|Purpose|
+|---|---|---|
+|GET|`/users/:id`|(Optional) Show user profile (for public decks later)|
+
+---
+
+#### **Learning Goals**
+
+|Verb|Route|Purpose|
+|---|---|---|
+|GET|`/goals`|List all goals for the logged-in user|
+|GET|`/goals/:id`|View a specific goal|
+|POST|`/goals`|Create a new goal|
+|PUT|`/goals/:id`|Update a goal (title, progress, etc.)|
+|DELETE|`/goals/:id`|Delete a goal|
+
+---
+
+#### **Decks & Flashcards**
+
+##### Decks
+
+|Verb|Route|Purpose|
+|---|---|---|
+|GET|`/decks`|List all decks for the logged-in user|
+|GET|`/decks/:id`|View a specific deck and its cards|
+|POST|`/decks`|Create a new deck|
+|PUT|`/decks/:id`|Update deck title/description|
+|DELETE|`/decks/:id`|Delete a deck|
+
+##### Flashcards (Nested under decks)
+
+|Verb|Route|Purpose|
+|---|---|---|
+|POST|`/decks/:deck_id/flashcards`|Add a flashcard to a deck|
+|PUT|`/flashcards/:id`|Update a flashcard|
+|DELETE|`/flashcards/:id`|Delete a flashcard|
+
+---
+
+#### **Study Sessions**
+
+|Verb|Route|Purpose|
+|---|---|---|
+|GET|`/study_sessions`|List sessions for dashboard display|
+|POST|`/study_sessions`|Log a new study session (manual entry)|
+
+> Notes: These are tied to a goal, so we could optionally use nested routes like `/goals/:goal_id/study_sessions`.
+
+---
+
+#### **Spaced Repetition & Review Queue**
+
+##### Flashcard Reviews
+
+|Verb|Route|Purpose|
+|---|---|---|
+|POST|`/flashcard_reviews`|Log a review session for a specific card|
+|GET|`/review_queue`|Get today’s due cards for the user|
+
+> `flashcard_reviews` table will include `flashcard_id`, `ease_rating`, and `next_due_date`.
+
+---
+
+#### **Progress Dashboard**
+
+| Verb | Route        | Purpose                                               |
+| ---- | ------------ | ----------------------------------------------------- |
+| GET  | `/dashboard` | Get aggregate data: streak, hours studied, goal stats |
+
+> Optional: Break this down into parts later (e.g., `/dashboard/streak`, `/dashboard/goals`)
+
+---
+
+#### Summary of MVP Controllers
+
+We’ll likely have these Rails controllers:
+
+- `UsersController`
+
+- `SessionsController` (or `AuthController`)
+
+- `GoalsController`
+
+- `DecksController`
+
+- `FlashcardsController`
+
+- `StudySessionsController`
+
+- `FlashcardReviewsController`
+
+- `DashboardController` (or a service object behind the scenes)
+
+---
+
+### **Tier 1 API Routes – Foundational Stretch**
+
+These routes support: **account settings, tagging, daily review mode, public decks, and public profiles**.
+
+---
+
+#### **Account Settings**
+
+|Verb|Route|Purpose|
+|---|---|---|
+|GET|`/settings`|Get current user settings (e.g. timezone)|
+|PUT|`/settings`|Update settings/preferences|
+
+> These can be stored in a `user_settings` table or embedded in the `users` model depending on app design.
+
+---
+
+#### **Tagging System**
+
+##### Tags (Managed by users, used for filtering)
+
+|Verb|Route|Purpose|
+|---|---|---|
+|GET|`/tags`|Get list of tags for filtering|
+|POST|`/tags`|Create a new tag|
+|DELETE|`/tags/:id`|Delete a tag|
+
+##### Tag Assignments (Polymorphic join model)
+
+|Verb|Route|Purpose|
+|---|---|---|
+|POST|`/taggings`|Add a tag to a deck or goal|
+|DELETE|`/taggings/:id`|Remove a tag from a deck or goal|
+
+---
+
+#### **Daily Review Mode**
+
+|Verb|Route|Purpose|
+|---|---|---|
+|GET|`/daily_review`|Return summary of tasks for today (cards, goals, reminders)|
+
+---
+
+#### **Public Deck Sharing**
+
+|Verb|Route|Purpose|
+|---|---|---|
+|GET|`/public_decks`|View all public decks from all users|
+|GET|`/public_decks/:id`|View a specific public deck|
+
+> These are read-only versions of user decks marked as `is_public: true`.
+
+---
+
+#### **Public Profiles (Lite)**
+
+|Verb|Route|Purpose|
+|---|---|---|
+|GET|`/profiles/:id`|View a user’s public profile, shared goals and decks|
+
+---
+
+##### Summary of Tier 1 Controllers
+
+We’ll likely extend existing or add:
+
+- `SettingsController` (or extend `UsersController`)
+
+- `TagsController`
+
+- `TaggingsController`
+
+- `PublicDecksController` _(or scoped from `DecksController`)_
+
+- `ProfilesController`
+
+- `DailyReviewController`
+
+---
+
+### **Tier 2 API Routes – Social & Engagement**
+
+---
+
+#### **Followers / Friends**
+
+|Verb|Route|Purpose|
+|---|---|---|
+|POST|`/followings`|Follow a user|
+|DELETE|`/followings/:id`|Unfollow a user|
+|GET|`/followers`|Get list of users following me|
+|GET|`/following`|Get list of users I’m following|
+
+> This uses a join table like `Followings` with `follower_id` and `followed_id`.
+
+---
+
+#### **Reactions**
+
+|Verb|Route|Purpose|
+|---|---|---|
+|POST|`/reactions`|React to a goal or deck|
+|DELETE|`/reactions/:id`|Remove a reaction|
+
+> Reactions are polymorphic (e.g., deck, goal, reflection) and may include a `reaction_type` or emoji.
+
+---
+
+#### **Social Feed**
+
+|Verb|Route|Purpose|
+|---|---|---|
+|GET|`/feed`|Return recent activity from users I follow|
+
+> Powered by an `ActivityLog` model tracking public actions.
+
+---
+
+#### **XP & Leveling**
+
+|Verb|Route|Purpose|
+|---|---|---|
+|GET|`/xp`|Get current XP total and level|
+|GET|`/xp/history`|View XP earned from recent actions|
+
+> XP may be calculated via background jobs or updated live on certain actions.
+
+---
+
+#### **Reminders / Notifications**
+
+|Verb|Route|Purpose|
+|---|---|---|
+|GET|`/notifications`|List unread or recent notifications|
+|PUT|`/notifications/:id`|Mark a notification as read|
+|DELETE|`/notifications/:id`|Remove a notification|
+
+> These could be triggered by cron jobs or user interactions (e.g., streak broken, review due).
+
+---
+
+#### **Badges & Achievements**
+
+|Verb|Route|Purpose|
+|---|---|---|
+|GET|`/badges`|View all available badges|
+|GET|`/my_badges`|View badges earned by the current user|
+
+> `Badges` is static content; `UserBadges` is a join table for earned achievements.
+
+---
+
+##### Summary of Tier 2 Controllers
+
+You may implement or extend:
+
+- `FollowingsController`
+
+- `ReactionsController`
+
+- `FeedController` (or use `ActivitiesController`)
+
+- `XPController`
+
+- `NotificationsController`
+
+- `BadgesController`, `UserBadgesController`
+
+---
+
+### **Tier 3 API Routes – Advanced Functionality**
+
+These routes support journaling, media-rich flashcards, advanced formatting, challenges, comments, activity timelines, and AI integration.
+
+---
+
+#### **Quests & Challenges**
+
+|Verb|Route|Purpose|
+|---|---|---|
+|GET|`/challenges`|View current available quests/challenges|
+|POST|`/challenges/:id/complete`|Log completion of a challenge by the user|
+
+> Challenges could be daily, weekly, or milestone-based; tracked in a `UserChallenges` join table.
+
+---
+
+#### **Comments**
+
+|Verb|Route|Purpose|
+|---|---|---|
+|POST|`/comments`|Post a comment on a deck or reflection|
+|DELETE|`/comments/:id`|Delete a comment (owner only)|
+|GET|`/comments?target_id=&type=`|Fetch comments for a specific object|
+
+> Polymorphic structure: `commentable_type` = "Deck", "Reflection", etc.
+
+---
+
+#### **Media in Flashcards**
+
+|Verb|Route|Purpose|
+|---|---|---|
+|POST|`/media_uploads`|Upload image or audio for a card|
+|GET|`/media/:id`|Retrieve uploaded media|
+
+> Actual media hosting may use ActiveStorage or a 3rd-party like Cloudinary.
+
+---
+
+#### **Markdown in Cards**
+
+Handled via frontend rendering and markdown parsing (e.g., `react-markdown`), so **no dedicated route** is needed beyond storing the `text` in the existing `flashcards` table.
+
+---
+
+#### **Reflections / Journaling**
+
+|Verb|Route|Purpose|
+|---|---|---|
+|GET|`/reflections`|List reflections (personal or public)|
+|POST|`/reflections`|Create a new reflection entry|
+|GET|`/reflections/:id`|View a specific reflection|
+|DELETE|`/reflections/:id`|Remove a reflection|
+
+---
+
+#### **Timeline of Activity**
+
+|Verb|Route|Purpose|
+|---|---|---|
+|GET|`/timeline`|Chronological list of user activity|
+
+> Can be built from the same `ActivityLog` used in the social feed.
+
+---
+
+#### **AI-Generated Flashcards**
+
+|Verb|Route|Purpose|
+|---|---|---|
+|POST|`/ai/generate_cards`|Submit text to generate flashcard suggestions|
+
+> Uses OpenAI API to parse input and return card data. Could require rate-limiting or credits.
+
+---
+
+##### Summary of Tier 3 Controllers
+
+- `ChallengesController`, `UserChallengesController`
+
+- `CommentsController`
+
+- `MediaUploadsController`
+
+- `ReflectionsController`
+
+- `TimelineController`
+
+- `AIController` (for proxying OpenAI requests)

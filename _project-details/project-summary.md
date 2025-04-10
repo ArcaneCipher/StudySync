@@ -533,7 +533,7 @@ We’ll likely extend existing or add:
 
 ##### Summary of Tier 2 Controllers
 
-You may implement or extend:
+We may implement or extend:
 
 - `FollowingsController`
 

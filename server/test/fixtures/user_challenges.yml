@@ -1,0 +1,11 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  user: one
+  challenge: one
+  completed_at: 2025-04-12 23:33:36
+
+two:
+  user: two
+  challenge: two
+  completed_at: 2025-04-12 23:33:36

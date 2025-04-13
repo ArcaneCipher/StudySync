@@ -9,7 +9,7 @@ Rails.application.routes.draw do
   # root "posts#index"
   namespace :api do
     namespace :v1 do
-      resources :your_resources  # example: quizzes, users, cards, etc.
+      resources :goals, only: [:index]  # Add more actions as needed later
     end
   end
 end

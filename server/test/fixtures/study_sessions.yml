@@ -1,0 +1,13 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  user: one
+  goal: one
+  duration_min: 1
+  notes: MyText
+
+two:
+  user: two
+  goal: two
+  duration_min: 1
+  notes: MyText

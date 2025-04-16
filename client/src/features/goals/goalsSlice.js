@@ -40,11 +40,47 @@ const goalsSlice = createSlice({
     // Action to add the goals in the state
     setGoals: (state, action) => {
       state.goals = action.payload; // Set the goals in the state
-    }
+    },
   },
   extraReducers: (builder) => {
     builder
       // Handle the fetchGoals action
-      
-  }
-})
+      .addCase(fetchGoals.pending, (state) => {
+        state.loading = true; // Set loading to true when fetching goals
+        state.error = null; // Reset error
+      })
+      // Handle the fetchGoals fulfilled action
+      .addCase(fetchGoals.fulfilled, (state, action) => {
+        state.loading = false; // Set loading to false when fetching is done
+        state.goals = action.payload; // Set the fetched goals in the state
+      })
+      // Handle fetch error
+      .addCase(fetchGoals.rejected, (state, action) => {
+        state.loading = false; // Set loading to false when fetching fails
+        state.error = action.error.message; // Set the error message
+      })
+
+      // Handle if goal is added successfully
+      .addCase(addGoal.fulfilled, (state, action) => {
+        state.goals.push(action.payload); // Add the new goal to the state
+      })
+
+      // Handle if goal is updated successfully
+      .addCase(editGoal.fulfilled, (state, action) => {
+        const updated = action.payload; // Updated goal from backend
+        const index = state.goals.findIndex((goal) => goal.id === updated.id); // Find the index of the updated goal
+        if (index !== -1) {
+          state.goals[index] = updated; // Update the goal in the state
+        }
+      })
+
+      // Handle if goal is deleted successfully
+      .addCase(deleteGoal.fulfilled, (state, action) => {
+        const idToRemove = action.payload; // ID of the goal to remove
+        state.goals = state.goals.filter((goal) => goal.id !== idToRemove); // Remove the goal from the state
+      });
+  },
+});
+
+export const { setGoals } = goalsSlice.actions; // Export the action to set goals
+export default goalsSlice.reducer; // Export the reducer to be used in the store 

@@ -1,5 +1,5 @@
-// import { useSelector, useDispatch } from "react-redux";
-// import { login, logout } from "../../features/user/userSlice";
+import { useSelector, useDispatch } from "react-redux";
+import { login, logout } from "../../features/auth/authSlice";
 import { useLocation } from 'react-router-dom';
 import { useEffect, useState } from 'react';
 import { Menu } from 'lucide-react';
@@ -32,16 +32,16 @@ const getFormattedDateParts = () => {
 
 
 const Header = () => {
-  // const dispatch = useDispatch();
-  // const { user, isAuthenticated } = useSelector((state) => state.user);
+  const dispatch = useDispatch();
+  const { user, isAuthenticated } = useSelector((state) => state.user);
 
-  // const handleAuthToggle = () => {
-  //   if (isAuthenticated) {
-  //     dispatch(logout());
-  //   } else {
-  //     dispatch(login({ name: "Alice", email: "alice@example.com" }));
-  //   }
-  // };
+  const handleAuthToggle = () => {
+     if (isAuthenticated) {
+       dispatch(logout());
+     } else {
+       dispatch(login({ name: "Alice", email: "alice@example.com" }));
+     }
+   };
   const location = useLocation();
   const [title, setTitle] = useState('');
   const [isCollapse, setIsCollapse] = useState(true);
@@ -61,7 +61,6 @@ const Header = () => {
   }
 
   useEffect(() => {
-    // Add or remove the class based on the current value of isCollapse
     if (isCollapse) {
       document.body.classList.remove('menu-open');
     } else {
@@ -74,20 +73,18 @@ const Header = () => {
     <header>
       <h3>{title}</h3>
       <p><b>{day}</b>, {date}</p>
+      <Menu className='menu-collapse' onClick={toggleCollapse} />
 
-      <Menu className='menu-collapse' onClick={toggleCollapse}/>
-      {/* <nav>
-        <div>
-          <button onClick={handleAuthToggle}>
-            {isAuthenticated ? "Logout" : "Login"}
-          </button>
-        </div>
-      </nav>
-      {isAuthenticated && (
-        <p style={{ fontSize: "0.9rem" }}>
-          Welcome, {user.name} ({user.email})
-        </p>
-      )} */}
+      <div className="auth-section">
+        <button onClick={handleAuthToggle} className="auth-button">
+          {isAuthenticated ? "Logout" : "Login"}
+        </button>
+        {isAuthenticated && (
+          <p className="welcome-text">
+            Welcome, {user.name} ({user.email})
+          </p>
+        )}
+      </div>
     </header>
   );
 };

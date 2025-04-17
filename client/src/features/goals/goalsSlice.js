@@ -1,5 +1,6 @@
 // createAsyncThunk is used for handling asynchronous actions instead of creating async logic manually
-import { createSlice, createAsyncThunk } from "@reduxjs/toolkit"; 
+import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
+import { getGoals, createGoal, updateGoal, removeGoal } from "../../api/goalsApi"; // Import API functions
 
 // Async thunk to fetch goals from the API
 export const fetchGoals = createAsyncThunk("goals/fetchGoals", async () => {

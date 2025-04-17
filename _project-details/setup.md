@@ -181,6 +181,6 @@ cd client npm run test
 
 - The `server/config/database.yml` uses values from your `.env` file for all DB configs.
 
-- Both `.env` files are `.gitignore`d — no secrets should be committed.
+- Both `.env` files are `.gitignored` — no secrets should be committed.
 
 ---

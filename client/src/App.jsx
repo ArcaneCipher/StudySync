@@ -3,6 +3,8 @@ import api from "./api/axios";
 import reactLogo from "./assets/react.svg";
 import viteLogo from "/vite.svg";
 import Layout from "./components/Layout/Layout";
+import TestAuth from "./components/TestAuth";
+
 
 function App() {
   const [count, setCount] = useState(0);
@@ -17,7 +19,8 @@ function App() {
           <img src={reactLogo} className="logo react" alt="React logo" />
         </a>
       </div>
-      <h1>Vite + React</h1>
+      <h1>StudySync - Auth Test</h1>
+      <TestAuth />
       <div className="card">
         <button onClick={() => setCount((count) => count + 1)}>
           count is {count}

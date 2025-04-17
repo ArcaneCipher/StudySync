@@ -34,28 +34,32 @@ const decksSlice = createSlice({
   reducers: {},
   extraReducers: (builder) => {
     builder
-      .addCase(fetchDecks.pending, (state) => {
-        state.status = 'loading'
-      })
-      .addCase(fetchDecks.fulfilled, (state, action) => {
-        state.status = 'succeeded'
-        state.decks = action.payload
-      })
-      .addCase(fetchDecks.rejected, (state, action) => {
-        state.status = 'failed'
-        state.error = action.error.message
-      })
-      .addCase(createDeck.fulfilled, (state, action) => {
-        state.decks.push(action.payload)
-      })
-      .addCase(updateDeck.fulfilled, (state, action) => {
-        const updated = action.payload
-        const index = state.decks.findIndex(deck => deck.id === updated.id)
-        if (index !== -1) state.decks[index] = updated
-      })
-      .addCase(deleteDeck.fulfilled, (state, action) => {
-        state.decks = state.decks.filter(deck => deck.id !== action.payload)
-      })
+    // Fetch
+    .addCase(fetchDecks.pending, (state) => {
+      state.status = 'loading'
+    })
+    .addCase(fetchDecks.fulfilled, (state, action) => {
+      state.status = 'succeeded'
+      state.decks = action.payload
+    })
+    .addCase(fetchDecks.rejected, (state, action) => {
+      state.status = 'failed'
+      state.error = action.error.message
+    })
+    // Create
+    .addCase(createDeck.fulfilled, (state, action) => {
+      state.decks.push(action.payload)
+    })
+    // Update
+    .addCase(updateDeck.fulfilled, (state, action) => {
+      const updated = action.payload
+      const index = state.decks.findIndex(deck => deck.id === updated.id)
+      if (index !== -1) state.decks[index] = updated
+    })
+    // Delete
+    .addCase(deleteDeck.fulfilled, (state, action) => {
+      state.decks = state.decks.filter(deck => deck.id !== action.payload)
+    })
   },
 });
 

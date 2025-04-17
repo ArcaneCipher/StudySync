@@ -37,7 +37,7 @@ Rails.application.routes.draw do
 
       # Decks & Flashcards
       resources :decks, except: [:new, :edit] do
-        resources :flashcards, only: [:create]
+        resources :flashcards, only: [:index, :create]
       end
       resources :flashcards, only: [:update, :destroy]
 

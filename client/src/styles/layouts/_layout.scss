@@ -1,5 +1,4 @@
-/* Layout Wrapper Styles */
-
+@use '../utils/variables' as *;
 .layout {
   display: flex;
   flex-direction: column;

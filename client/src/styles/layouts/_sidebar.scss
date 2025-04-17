@@ -1,0 +1,67 @@
+@use '../utils/variables' as *;
+.sidebar {
+  width: 280px;
+  position: fixed;
+  top: 20px;
+  left: 20px;
+  bottom: 20px;
+  background: #f9f8fc;
+  border-radius: 10px;
+  padding: 30px;
+  display: flex;
+  flex-direction: column;
+  transition: all 0.3 linear;
+  .logo{
+    display: block;
+    margin: 0 auto;
+  }  
+  .nav-links {
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      flex-grow: 1;
+    ul {
+      list-style-type: none;
+      padding: 0;    
+      margin-top: 80px;
+      margin-left: 20px;
+      margin-bottom: 0;
+      li {
+        a {    
+          display: flex;
+          align-items: center;
+          color: $primary;
+          transition: all .3s ease-in;
+          font-weight: 600;
+          &:hover {
+            color: $purple;
+          }
+          svg{
+            margin-right: 12px;
+          }
+        }
+        &:not(:last-child) {
+          margin-bottom: 20px;
+        }
+      }
+      &.logout {
+        margin-top: auto;
+      }
+    }
+  }
+}
+
+@media(max-width:1199px) {
+  .sidebar {
+    left: 0;
+    top: 0;
+    bottom: 0;
+    transform: translateX(-280px);
+  }
+  .menu-open .sidebar {
+    transition: all 0.3 linear;
+    transform: translateX(0);
+    left: 0;
+    z-index: 99;
+  }
+}

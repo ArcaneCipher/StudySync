@@ -1,0 +1,43 @@
+@use '../utils/variables' as *;
+
+.btn-row {
+  display: flex;
+  gap: 1rem;
+}
+
+.btn {
+  font-size: 14px;
+  font-weight: 600;
+  padding: 0.65rem 1.25rem;
+  border-radius: 0.5rem;
+  transition: all 0.2s ease;
+  border: none;
+  cursor: pointer;
+  font-family: inherit;
+
+  &.primary {
+    background-color: $purple;
+    color: $white;
+
+    &:hover {
+      background-color: darken($purple, 10%);
+    }
+  }
+  &.secondary {
+    background: transparent;
+    border: 2px solid $purple;
+    color: $purple;
+
+    &:hover {
+      background-color: $purple1;
+    }
+  }
+  &.ghost {
+    background: transparent;
+    color: $primary;
+
+    &:hover {
+      background-color: $grey;
+    }
+  }
+}

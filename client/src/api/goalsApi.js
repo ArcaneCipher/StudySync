@@ -2,7 +2,7 @@ import axios from "./axios"; // Configured axios instance
 
 // GET all goals
 export const getGoals = async () => {
-  const response = await axios.get("/goals"); // Make a GET request to fetch all goals
+  const response = await axios.get("/api/v1/goals"); // Make a GET request to fetch all goals
   return response.data; // Return the data from the response
 };
 

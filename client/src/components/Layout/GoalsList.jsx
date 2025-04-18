@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import useGoals from "../../hooks/useGoals";
-// import GoalForm from "./GoalForm";
+import GoalForm from "./GoalForm";
 
 const GoalsList = () => {
   const {
@@ -45,11 +45,11 @@ const GoalsList = () => {
     <div>
       <h2>Goals List</h2>
       {/* Conditionally render GoalForm for adding or editing goals */}
-      {/* {editingGoal ? (
+      {editingGoal ? (
         <GoalForm goal={editingGoal} onSave={handleSaveClick} onCancel={handleCancelClick} />
       ) : (
         <GoalForm onSave={handleSaveClick} onCancel={handleCancelClick} />
-      )} */}
+      )}
 
       {/* Render loading or error messages */}
       {loading && <p>Loading goals...</p>}
@@ -59,6 +59,7 @@ const GoalsList = () => {
       <ul>
         {goals.map((goal) => (
           <li key={goal.id}>
+            <div className="goal_info">
               <div className="goal_title">
                 <h3>{goal.title}</h3>
               </div>
@@ -72,6 +73,7 @@ const GoalsList = () => {
               <button onClick={() => handleEditClick(goal)}>Edit</button>
               <button onClick={() => removeGoal(goal.id)}>Delete</button>
               </div>
+            </div>
           </li>
         ))}
       </ul>

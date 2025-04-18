@@ -1,9 +1,8 @@
-/* Footer Styles */
-
-.footer {
-  padding: 1rem 2rem;
-  background-color: #1a1a1a;
-  color: white;
-  text-align: center;
-  font-size: 0.875rem;
+@use '../utils/variables' as *;
+footer {
+  margin-top: auto;
+  text-align: right;
+  p {
+    margin: 0;
+  }
 }

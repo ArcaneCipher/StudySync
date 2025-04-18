@@ -1,0 +1,27 @@
+@use '../utils/variables' as *;
+.input-group {
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
+
+  label {
+    font-size: 0.9rem;
+    color: $primary;
+    font-weight: 600;
+  }
+
+  input {
+    padding: 0.6rem 1rem;
+    border: 1px solid #ddd;
+    border-radius: 0.5rem;
+    font-size: 1rem;
+    font-family: inherit;
+    transition: border-color 0.2s;
+    color: $primary;
+    height: 46px;
+    &:focus {
+      border-color: $purple;
+      outline: none;
+    }
+  }
+}

@@ -1,0 +1,19 @@
+@use '../utils/variables' as *;
+.ui-showcase {
+  padding: 2.5rem;
+  color: $primary;
+
+  h2 {
+    font-size: 1.8rem;
+    margin-bottom: 2rem;
+  }
+
+  section {
+    margin-bottom: 2rem;
+
+    > h3 {
+      margin-bottom: 1rem;
+      color: $purple;
+    }
+  }
+}

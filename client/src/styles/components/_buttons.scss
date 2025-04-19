@@ -14,11 +14,12 @@
   border: none;
   cursor: pointer;
   font-family: inherit;
-
   &.primary {
     background-color: $purple;
     color: $white;
-
+    a {
+      color: $white;
+    }
     &:hover {
       background-color: darken($purple, 10%);
     }

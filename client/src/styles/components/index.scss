@@ -1,7 +1,9 @@
 @use '../utils/' as *;
 @forward './buttons';
 @forward './app';
-@forward './deck';
+@forward './deckcard';
 @forward './flashcard';
 @forward './input';
+@forward './toggleswitch';
 @forward './uishowcase';
+@forward './textarea';

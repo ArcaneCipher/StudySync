@@ -1,0 +1,147 @@
+@use '../utils/variables' as *;
+
+.deck-wrapper {
+  display: flex;
+  align-items: flex-start;
+  padding: 2rem;
+  overflow: hidden;
+  border-bottom: 1px solid $grey;
+  .deck-card {
+    background: linear-gradient(to bottom, #ef476f, #f78c25);
+    background: linear-gradient(to bottom, hsl(250.83deg 35.64% 60.39% / 70%), hsl(205.71deg 7.07% 19.41% / 30%));
+    border-radius: 1rem;
+    padding: 1.5rem;
+    width: 220px;
+    height: 320px;
+    margin-right: 2rem;
+    color: #ffffff;
+    transition: all 0.3s linear;
+    position: relative;
+    cursor: pointer;
+    display: flex;
+    flex-direction: column;
+    justify-content: end;
+    h3 {
+      margin-bottom: 1rem;
+    }
+    p {
+      margin-top: 0;
+      margin-bottom: 1rem;
+      transition: all 0.3s linear;
+    }
+    .edit-overlay{
+      padding: 1.5rem;
+      height: auto;
+      width: auto;
+      background: transparent;
+      bottom: 0;
+      top: auto;
+      padding-top: 0;
+    }
+    &:hover {
+      transform: translateY(-10px) scale(1.02);
+      box-shadow: 0 8px 12px rgba(0,0,0,0.1);
+      .lucide-circle-x,.edit-overlay {
+        opacity: 1;
+      }
+      button {
+        margin-bottom: 2.5rem;
+      }
+    }
+  }
+  .edit-overlay{
+    background: #6e669166;
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    border-radius: 1rem;
+    display: flex;
+    align-items: end;
+    padding: 1rem;
+    transition: all 0.3s ease-in;
+    opacity: 0;
+  }
+  .lucide-square-pen {
+    z-index: 9;
+  }
+  .lucide-circle-x {
+    position: absolute;
+    top: -8px;
+    right: -8px;
+    opacity: 0;
+    background-color: $primary;
+    color: $white;
+    transition: all 0.3s ease-in;
+    border-radius: 100%;
+    z-index: 9;
+  }
+  .flashcards {
+    display: flex;
+    position: relative;
+    .card {
+      background: $purple1;
+      border-radius: 1rem;
+      width: 220px;
+      height: 320px;
+      color:  $primary;
+      padding: 1rem;
+      position: relative;
+      margin-left: -160px;
+      transition: all 0.3s linear;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+      cursor: pointer;
+      &:first-child {
+        margin-left: 0;
+      }
+      &:last-child {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        flex-direction: column;
+        .lucide-circle-plus {
+          width: 32px;
+          height: 32px;
+          cursor: pointer;
+        }
+      }
+      &:hover {
+        transform: translateY(-20px) scale(1.02);
+        box-shadow: 0 12px 30px rgba(0, 0, 0, 0.6);
+        margin-right: 150px;        
+        .lucide-circle-x,.edit-overlay {
+          opacity: 1;
+        }
+      }
+      &.widecard {
+        width: 350px;
+        form {
+          width: 100%;
+        }
+        .lucide-circle-plus {
+          display: none;
+        }
+      }
+      h4 {
+        font-weight: 400;
+      }
+    }
+  }
+  .deck-edit {
+    width: 350px;
+    height: 320px;
+    padding: 1rem;
+    border: 1px solid #ddd;
+    border-radius: 1rem;
+  }
+
+  .flashcards-wrapper {
+    position: relative;
+    > * {
+      position: absolute;
+      left: 0;
+    }
+  }
+  
+}

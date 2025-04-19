@@ -29,8 +29,8 @@ const UIShowcase = () => {
 
       <section>
         <h3>Flashcard</h3>
-        <div class="grid-container">
-          <div class="grid-col-3">            
+        <div className="grid-container">
+          <div className="grid-col-3">            
             <div className={`flashcard ${isFlip ? 'flip' : ''}`}> 
               <div className="front">
                 What is React?
@@ -42,7 +42,7 @@ const UIShowcase = () => {
               </div>
             </div>
           </div>
-          <div class="grid-col-3">            
+          <div className="grid-col-3">            
             <div className='flashcard'> 
               <div className="front">
                 What is React?
@@ -52,7 +52,7 @@ const UIShowcase = () => {
               </div>
             </div>
           </div>
-          <div class="grid-col-3">            
+          <div className="grid-col-3">            
             <div className='flashcard'> 
               <div className="front">
                 What is React?
@@ -62,7 +62,7 @@ const UIShowcase = () => {
               </div>
             </div>
           </div>
-          <div class="grid-col-3">            
+          <div className="grid-col-3">            
             <div className='flashcard'> 
               <div className="front">
                 What is React?

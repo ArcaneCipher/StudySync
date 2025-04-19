@@ -57,8 +57,15 @@ a {
 .mt30{
   margin-top: 30px;
 }
-
-
+.transtion {
+  transition: all .5s ease-in;
+}
+.opacity-0 {
+  opacity: 0;
+}
+.opacity-1 {
+  opacity: 1;
+}
 @media (prefers-color-scheme: light) {
   :root {
     color: $primary;

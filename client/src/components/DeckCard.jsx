@@ -88,4 +88,4 @@ const DeckCard = ({
 
 export default DeckCard;
 
-<Route path="/study/:deckId" element={<Study />} />
+// <Route path="/study/:deckId" element={<Study />} />

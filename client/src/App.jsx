@@ -3,6 +3,8 @@ import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import Dashboard from './pages/Dashboard';
 import Decks from "./pages/Decks";
 // import TestAuth from "./components/TestAuth"; // ⚠️ Remove when done testing Auth ⚠️
+import TestAuth from "./components/TestAuth"; // ⚠️ Remove when done testing Auth ⚠️
+import GoalsList from "./components/Layout/GoalsList";
 
 function App() {
   return (
@@ -14,6 +16,7 @@ function App() {
             <Route path="/" element={<Dashboard />} />
             <Route path="/goals" element={<></> } />
             <Route path="/decks" element={<Decks />} />
+            <Route path="/goals" element={<GoalsList />} />
           </Routes>
         </Layout>
       </Router>

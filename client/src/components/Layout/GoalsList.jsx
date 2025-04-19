@@ -28,9 +28,9 @@ const GoalsList = () => {
   // Handle Saving the edited goal
   const handleSaveClick = (goalData) => {
     if (editingGoal) {
-      updateExistingGoal({ ...editingGoal, ...goalData }); // Update the goal with new data
+      updateExistingGoal({ ...editingGoal, ...goalData.goal }); // Update the goal with new data
     } else {
-      createNewGoal(goalData); // Create a new goal if not editing
+      createNewGoal(goalData.goal); // Create a new goal if not editing
     }
     setEditingGoal(null); // Reset the editing goal state
   };

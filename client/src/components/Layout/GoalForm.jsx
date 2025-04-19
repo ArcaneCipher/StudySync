@@ -22,10 +22,14 @@ const GoalForm = ({ goal = null, onSave, onCancel }) => {
 
   const handleSubmit = (e) => {
     e.preventDefault(); // Prevent default form submission
+
     const goalData = {
-      title,
-      description,
-      target_hours: Number(targetHours), // Convert target hours to a number
+      goal: {
+        user_id: 1, // Replace with actual logged-in user ID later
+        title,
+        description,
+        target_hours: Number(targetHours), // Convert target hours to a number
+      }
     };
     onSave(goalData); // Call the save function with the goal data
   };

@@ -11,7 +11,7 @@ const GoalForm = ({ goal = null, onSave, onCancel }) => {
     if (goal) {
       setTitle(goal.title || "");
       setDescription(goal.description || "");
-      setTargetHours(goal.targetHours || "");
+      setTargetHours(goal.target_hours || "");
     } else {
       // Clear fields if switching from editing to adding a new goal
       setTitle("");

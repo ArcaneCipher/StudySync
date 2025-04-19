@@ -6,11 +6,12 @@ import Input from './Input';
 import Textarea from './Textarea';
 import ToggleSwitch from './ToggleSwitch';
 import AnimatedCard from './AnimatedCard';
-import { AnimatePresence, } from "framer-motion";
+import { AnimatePresence } from "framer-motion";
 import { CircleX, SquarePen, Trash2 } from 'lucide-react'; 
 
+// DeckCard component displays a deck and conditionally allows editing
 const DeckCard = ({
-  deck,
+  deck,                 
   editingDeckId,
   editForm,
   setEditForm,
@@ -19,25 +20,37 @@ const DeckCard = ({
   handleDelete,
   handleEditClick
 }) => {
-  const isEditing = editingDeckId === deck.id;
+  const isEditing = editingDeckId === deck.id; // check if this deck is being edited
 
   return (
     <>
       <div className='deck-wrapper'>
+        {/* Main deck card display */}
         <div className="deck-card">
           <h3>{deck.title}</h3>
           <p>{deck.description}</p>
+
+          {/* Mobile-only button row for Study and Edit/Delete */}
           <div className='mobile-btn-row'>
-            <Button variant='primary'><Link to={`/study/${deck.id}`}>Study</Link></Button>
+            <Button variant='primary'>
+              <Link to={`/study/${deck.id}`}>Study</Link>
+            </Button>
+
             <div className="edit-overlay">
-              <SquarePen onClick={() => handleEditClick(deck)}/>  
-              <Trash2 onClick={() => handleDelete(deck.id)}/>     
+              <SquarePen onClick={() => handleEditClick(deck)} />  
+              <Trash2 onClick={() => handleDelete(deck.id)} />     
             </div>
           </div>
-          <CircleX onClick={() => handleDelete(deck.id)}/>
-           {/* <p><strong>{deck.is_public ? 'Public' : 'Private'}</strong></p> */}
+
+          {/* Extra delete icon for non-mobile usage */}
+          <CircleX onClick={() => handleDelete(deck.id)} />
+          {/* <p><strong>{deck.is_public ? 'Public' : 'Private'}</strong></p> */}
         </div>
+
+        {/* Section below the deck for flashcards or edit form */}
         <div className="flashcards-wrapper">
+
+          {/* Show Edit Form if in edit mode */}
           <AnimatePresence mode="wait">   
             {isEditing && 
               <AnimatedCard className='deck-edit'
@@ -47,23 +60,33 @@ const DeckCard = ({
                 exit={{ opacity: 0, x: -30 }}
                 transition={{ duration: 0.4, ease: "easeInOut" }}
               >
+                {/* Deck Title Input */}
                 <Input
                   type="text"
-                  value={editForm.title} label="Title"
+                  value={editForm.title}
+                  label="Title"
                   onChange={(e) => setEditForm({ ...editForm, title: e.target.value })}
                   placeholder="Title"
                 />
+
+                {/* Deck Description Input */}
                 <Textarea
-                  value={editForm.description} rows={2} label="Description"
+                  value={editForm.description}
+                  rows={2}
+                  label="Description"
                   onChange={(e) => setEditForm({ ...editForm, description: e.target.value })}
                   placeholder="Description"
                 />
+
+                {/* Public/Private Toggle */}
                 <ToggleSwitch 
                   isPublic={editForm.is_public}  
                   onChange={(newVal) =>
                     setEditForm({ ...editForm, is_public: newVal })
                   } 
                 />
+
+                {/* Save/Cancel Buttons */}
                 <div className="btn-row">  
                   <Button onClick={handleUpdate}>Save</Button>
                   <Button variant='secondary' onClick={() => setEditingDeckId(null)}>Cancel</Button>
@@ -71,6 +94,8 @@ const DeckCard = ({
               </AnimatedCard> 
             }
           </AnimatePresence>
+
+          {/* Show Flashcards if NOT in edit mode */}
           <AnimatePresence mode="wait">
             {!isEditing && 
               <AnimatedCard
@@ -81,7 +106,7 @@ const DeckCard = ({
                 transition={{ duration: 0.4, ease: "easeInOut" }}
               >
                 <Flashcards deckId={deck.id} />
-                </AnimatedCard>
+              </AnimatedCard>
             }       
           </AnimatePresence> 
         </div> 

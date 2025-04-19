@@ -19,6 +19,7 @@ body {
   padding-left: 300px; 
   font-family: "Poppins", sans-serif;
   color: $primary;
+  position: relative;
 }
 
 h1 {
@@ -85,7 +86,11 @@ a {
   box-sizing: border-box;
 }
 
-
+@media(max-width:1600px) {
+  body {
+    padding-left: 220px;
+  }
+}
 @media(max-width:1199px) {
   body {
     padding-left: 0; 

@@ -1,7 +1,8 @@
 @use '../utils/variables' as *;
-footer {
+footer {    
   margin-top: auto;
   text-align: right;
+  padding-top: 20px;
   p {
     margin: 0;
   }

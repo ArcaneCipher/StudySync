@@ -6,7 +6,7 @@ import {
   updateFlashcard,
   deleteFlashcard,
 } from '../features/flashcards/flashcardsSlice';
-import { CirclePlus, CircleX, SquarePen } from 'lucide-react';
+import { CirclePlus, CircleX, SquarePen, Trash2 } from 'lucide-react';
 import Button from './Button';
 import Input from './Input';
 import Textarea from './Textarea';
@@ -91,14 +91,15 @@ const Flashcards = ({ deckId }) => {
 
   
       {/* List of flashcards */}
-      <div className='flashcards'>
+      <div className={`flashcards ${newCard ? 'new-card' : ''}`}>
         {flashcards.map((card) => (
           <div key={card.id} className="card">
-            <CircleX onClick={() => handleDelete(card.id)}/>
             <h4>{card.front_text}</h4>
             <div className="edit-overlay">
-              <SquarePen onClick={() => handleEdit(card)}/>       
+              <SquarePen onClick={() => handleEdit(card)}/>    
+              <Trash2 onClick={() => handleDelete(card.id)}/>      
             </div>
+            <CircleX onClick={() => handleDelete(card.id)}/>
           </div>
         ))}
         <div className={`card${newCard ? ' widecard' : ''}`}>
@@ -113,14 +114,14 @@ const Flashcards = ({ deckId }) => {
               <Input 
                 type="text"
                 name="front_text"
-                placeholder="Question"
+                label="Question"
                 value={form.front_text}
                 onChange={handleChange} 
                 required 
               />
               <Textarea
                 name="back_text"
-                placeholder="Answer"
+                label="Answer"
                 value={form.back_text}
                 onChange={handleChange}
                 required />

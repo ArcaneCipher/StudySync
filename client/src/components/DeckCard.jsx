@@ -5,8 +5,9 @@ import Button from './Button';
 import Input from './Input';
 import Textarea from './Textarea';
 import ToggleSwitch from './ToggleSwitch';
-import { AnimatePresence, motion } from "framer-motion";
-import { CirclePlus, CircleX, SquarePen } from 'lucide-react'; 
+import AnimatedCard from './AnimatedCard';
+import { AnimatePresence, } from "framer-motion";
+import { CircleX, SquarePen, Trash2 } from 'lucide-react'; 
 
 const DeckCard = ({
   deck,
@@ -24,20 +25,23 @@ const DeckCard = ({
     <>
       <div className='deck-wrapper'>
         <div className="deck-card">
-          <CircleX onClick={() => handleDelete(deck.id)}/>
-            <h3>{deck.title}</h3>
-            <p>{deck.description}</p>
+          <h3>{deck.title}</h3>
+          <p>{deck.description}</p>
+          <div className='mobile-btn-row'>
             <Button variant='primary'><Link to={`/study/${deck.id}`}>Study</Link></Button>
             <div className="edit-overlay">
-              <SquarePen onClick={() => handleEditClick(deck)}/>       
+              <SquarePen onClick={() => handleEditClick(deck)}/>  
+              <Trash2 onClick={() => handleDelete(deck.id)}/>     
             </div>
+          </div>
+          <CircleX onClick={() => handleDelete(deck.id)}/>
            {/* <p><strong>{deck.is_public ? 'Public' : 'Private'}</strong></p> */}
         </div>
         <div className="flashcards-wrapper">
           <AnimatePresence mode="wait">   
             {isEditing && 
-              <motion.div className='deck-edit'
-                key="flashcards"
+              <AnimatedCard className='deck-edit'
+                key="decks"
                 initial={{ opacity: 0, x: -30 }}
                 animate={{ opacity: 1, x: 0 }}
                 exit={{ opacity: 0, x: -30 }}
@@ -62,14 +66,14 @@ const DeckCard = ({
                 />
                 <div className="btn-row">  
                   <Button onClick={handleUpdate}>Save</Button>
-                  <Button onClick={() => setEditingDeckId(null)}>Cancel</Button>
+                  <Button variant='secondary' onClick={() => setEditingDeckId(null)}>Cancel</Button>
                 </div>
-              </motion.div> 
+              </AnimatedCard> 
             }
           </AnimatePresence>
           <AnimatePresence mode="wait">
             {!isEditing && 
-              <motion.div
+              <AnimatedCard
                 key="flashcards"
                 initial={{ opacity: 0, x: 50 }}
                 animate={{ opacity: 1, x: 0 }}
@@ -77,7 +81,7 @@ const DeckCard = ({
                 transition={{ duration: 0.4, ease: "easeInOut" }}
               >
                 <Flashcards deckId={deck.id} />
-                </motion.div>
+                </AnimatedCard>
             }       
           </AnimatePresence> 
         </div> 

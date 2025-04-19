@@ -1,0 +1,33 @@
+.btn-deck-create{
+  position: absolute;
+  right: 20px;
+  top: 20px;
+}
+.deck-create {
+  padding: 1.5rem;
+  border: 1px solid #ddd;
+  border-radius: 1rem;
+  h2 {
+    margin-top: 0;
+  }
+}
+
+@media(max-width:1199px) {
+  .btn-deck-create {
+    right: 60px;
+  }
+}
+
+@media(max-width:767px) {
+  .btn-deck-create {
+    position: relative;
+    right: auto;
+    top: 0;
+    display: flex;
+    justify-content: end;
+    margin-bottom: 1rem;
+  }
+  .deck-create {
+    margin: 1.25rem 0;
+  }
+}

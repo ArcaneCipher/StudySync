@@ -10,7 +10,8 @@
   padding: 30px;
   display: flex;
   flex-direction: column;
-  transition: all 0.3 linear;
+  transition: all 0.5s ease-in;
+  z-index: 10;
   .logo{
     display: block;
     margin: 0 auto;
@@ -51,15 +52,27 @@
   }
 }
 
+@media(max-width:1600px) and (min-width:1200px) {
+  .sidebar {
+    width: 200px;
+    padding: 2rem 1rem;
+    .logo {
+      width: 160px;
+    }
+    .nav-links ul {
+      margin-left: 10px;
+    }
+  }
+}
 @media(max-width:1199px) {
   .sidebar {
     left: 0;
     top: 0;
     bottom: 0;
-    transform: translateX(-280px);
+    transform: translateX(-320px);
+    box-shadow: 5px 5px 30px rgb(0 0 0 / 15%)
   }
   .menu-open .sidebar {
-    transition: all 0.3 linear;
     transform: translateX(0);
     left: 0;
     z-index: 99;

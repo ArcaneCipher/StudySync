@@ -1,0 +1,43 @@
+@use '../utils/variables' as *;
+.visibility-toggle {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  cursor: pointer;
+  user-select: none;  
+  margin-bottom: 12px;
+
+
+  .toggle {
+    width: 50px;
+    height: 26px;
+    border-radius: 50px;
+    background-color: $primary;
+    position: relative;
+    transition: background-color 0.3s ease;
+
+    &.public {
+      background-color: $purple;
+      .handle {
+        transform: translateX(24px);
+      }
+    }
+
+    .handle {
+      width: 22px;
+      height: 22px;
+      background-color: #fff;
+      border-radius: 50%;
+      position: absolute;
+      top: 2px;
+      left: 2px;
+      transition: transform 0.3s ease;
+    }
+  }
+
+  .label {
+    font-size: 0.9rem;
+    font-weight: 500;
+    color: #333;
+  }
+}

@@ -1,0 +1,313 @@
+@use '../utils/variables' as *;
+.deck-wrapper {
+  display: flex;
+  align-items: flex-start;
+  padding: 2rem 0;
+  overflow: auto;
+  &:not(:last-child) {
+    border-bottom: 1px solid $grey;
+  }
+  &::-webkit-scrollbar {
+    height: 2px;
+  }
+  &::-webkit-scrollbar-track {
+    border-radius: 0;
+    background: $grey;
+  }
+  &::-webkit-scrollbar-thumb {
+    border-radius: 0;
+    background: #b0b0b0;
+  }
+  .deck-card {
+    background: linear-gradient(to bottom, #ef476f, #f78c25);
+    background: linear-gradient(to bottom, hsl(250.83deg 35.64% 60.39% / 70%), hsl(205.71deg 7.07% 19.41% / 30%));
+    border-radius: 1rem;
+    padding: 1.5rem;
+    width: 220px;
+    height: 320px;
+    margin-right: 2rem;
+    color: #ffffff;
+    transition: all 0.3s linear;
+    position: relative;
+    cursor: pointer;
+    display: flex;
+    flex-direction: column;
+    justify-content: end;
+    h3 {
+      margin-bottom: 1rem;
+    }
+    p {
+      margin-top: 0;
+      margin-bottom: 1rem;
+      transition: all 0.3s linear;
+    }
+    .edit-overlay{
+      padding: 1.5rem;
+      height: auto;
+      width: auto;
+      background: transparent;
+      bottom: 0;
+      top: auto;
+      padding-top: 0;
+    }
+    &:hover,&:focus,&:focus-within,&:focus-visible {
+      transform: translateY(-10px) scale(1.02);
+      box-shadow: 0 8px 12px rgba(0,0,0,0.1);
+      .lucide-circle-x,.edit-overlay {
+        opacity: 1;
+      }
+      button {
+        margin-bottom: 2.5rem;
+      }
+    }
+    button {
+      width: 100%;
+    }
+  }
+  .edit-overlay{
+    background: #6e669166;
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    border-radius: 1rem;
+    display: flex;
+    align-items: end;
+    padding: 1rem;
+    transition: all 0.3s ease-in;
+    opacity: 0;
+  }
+  .lucide-square-pen {
+    z-index: 9;
+  }
+  .lucide-circle-x {
+    position: absolute;
+    top: -8px;
+    right: -8px;
+    opacity: 0;
+    background-color: $primary;
+    color: $white;
+    transition: all 0.3s ease-in;
+    border-radius: 100%;
+    z-index: 9;
+  }
+  .flashcards {
+    display: flex;
+    position: relative;
+    .card {
+      background: $purple1;
+      border-radius: 1rem;
+      width: 220px;
+      height: 320px;
+      color:  $primary;
+      padding: 1rem;
+      position: relative;
+      margin-left: -160px;
+      transition: all 0.3s linear;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+      cursor: pointer;
+      &:first-child {
+        margin-left: 0;
+      }
+      &:last-child {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        flex-direction: column;
+        .lucide-circle-plus {
+          width: 32px;
+          height: 32px;
+          cursor: pointer;
+        }
+      }
+      &:hover,&:focus,&:focus-within,&:focus-visible {
+        transform: translateY(-20px) scale(1.02);
+        box-shadow: 0 12px 30px rgba(0, 0, 0, 0.6);
+        margin-right: 150px;        
+        .lucide-circle-x,.edit-overlay {
+          opacity: 1;
+        }
+      }
+      &.widecard {
+        width: 350px;
+        form {
+          width: 100%;
+        }
+        .lucide-circle-plus {
+          display: none;
+        }
+      }
+      h4 {
+        font-weight: 400;
+        margin-bottom: 10px;
+      }
+    }
+  }
+  .deck-edit {
+    width: 350px;
+    height: 320px;
+    padding: 1rem;
+    border: 1px solid #ddd;
+    border-radius: 1rem;
+  }
+
+  .flashcards-wrapper {
+    position: relative;
+    > * {
+      position: absolute;
+      left: 0;
+    }
+  }
+  .lucide-trash-2 {
+    display: none;
+  }
+}
+
+@media(max-width:1600px) {
+  .deck-wrapper {
+    .deck-card{
+      margin-right: 20px;
+    }
+    .flashcards {
+      .card {
+        &.widecard {
+          width: 280px;
+        }
+      }
+    }
+  }
+}
+@media(max-width:767px) {
+  .deck-wrapper {
+    padding: 0;
+    border: 1px solid #e4e4e4;
+    border-radius: 1rem;
+    margin-bottom: 1rem;
+    overflow: visible;
+    flex-direction: column;
+    .deck-card{
+      margin: 0;
+      width: 100%;
+      height: auto;
+      border-radius: 1rem 1rem 0 0;
+      padding: 1.25rem;
+      button {
+        width: 80px;
+      }
+      &:hover,&:focus,&:focus-within,&:focus-visible {
+        transform: none;
+        box-shadow: none;
+        button {
+          margin-bottom: 0;
+        }
+      }
+      h3 {
+        margin-top: .5rem;
+      }
+      .mobile-btn-row {
+        display: flex;
+        align-items: center;
+        gap: .5rem;
+        justify-content: space-between;
+      }
+    }
+    .flashcards {
+      display: block;
+      position: static;
+        &.new-card::after {
+          content: '';
+          position: absolute;
+          left: 0;
+          top: 0;
+          background: rgb(57 55 56 / 79%);
+          width: 100%;
+          z-index: 12;
+          height: 100%;
+        }
+        .card {
+          width: 100%;
+          height: 120px;
+          margin: 0 0 -3rem;
+          z-index: 9;
+          h4 {
+            margin-top: 0;
+            min-height: 48px;
+          }
+          &:last-child {
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          flex-direction: column;
+          margin-bottom: 0;
+          transition: none;
+          .lucide-circle-plus {
+            width: 32px;
+            height: 32px;
+            cursor: pointer;
+          }
+        }
+        &:hover,&:focus,&:focus-within,&:focus-visible {
+          margin-bottom: 0;
+          z-index: 9;
+          margin-right: 0;      
+          
+        }
+        &.widecard {
+          width: 90%;
+          height: auto;
+          position: fixed;
+          top: 50%;
+          transform: translate(-50%, -50%);
+          left: 50%;
+          z-index: 99;
+          .lucide-circle-x {
+            position: absolute;
+            top: -8px;
+            right: -8px;
+            display: block;
+            background-color: #2e3235;
+            color: #ffffff;
+            transition: all 0.3s ease-in;
+            border-radius: 100%;
+            z-index: 9;
+            opacity: 1;
+          }
+        }
+      }
+    }
+    .flashcards-wrapper {
+      width: 100%;
+      padding: 1rem;
+      position: static;
+      > * {
+        position: static;
+      }
+    }
+    .edit-overlay {
+      opacity: 1;
+      background: transparent;
+      position: relative;
+      top: auto;
+      left: auto;
+      border-radius: 1rem;
+      padding: 0 !important;        
+      justify-content: end;
+    }
+    .edit-overlay{
+      width: auto;
+      height: auto;
+      gap: .5rem;
+    }
+    .lucide-trash-2 {
+      display: inline-block;
+    }
+    .lucide-circle-x {
+      display: none;
+    }
+    .deck-edit {
+      width: 100%;
+      height: auto;
+    }
+  }
+}

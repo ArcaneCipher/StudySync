@@ -4,7 +4,7 @@ import Dashboard from './pages/Dashboard';
 import Decks from "./pages/Decks";
 // import TestAuth from "./components/TestAuth"; // ⚠️ Remove when done testing Auth ⚠️
 import TestAuth from "./components/TestAuth"; // ⚠️ Remove when done testing Auth ⚠️
-import GoalsList from "./components/Layout/GoalsList";
+import GoalsList from "./components/GoalsList";
 
 function App() {
   return (
@@ -14,7 +14,6 @@ function App() {
           {/* <TestAuth /> // ⚠️ Remove when done testing Auth ⚠️ */}
           <Routes location={location} key={location.pathname}>
             <Route path="/" element={<Dashboard />} />
-            <Route path="/goals" element={<></> } />
             <Route path="/decks" element={<Decks />} />
             <Route path="/goals" element={<GoalsList />} />
           </Routes>

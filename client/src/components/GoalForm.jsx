@@ -1,4 +1,5 @@
 import { useState, useEffect } from "react";
+import "../styles/components/_goalform.scss"; // Import styles for the GoalForm component
 
 // GoalForm component to add or edit goals
 const GoalForm = ({ goal = null, onSave, onCancel }) => {

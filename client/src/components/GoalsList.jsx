@@ -1,6 +1,10 @@
 import { useEffect, useState } from "react";
-import useGoals from "../../hooks/useGoals";
+import useGoals from "../hooks/useGoals";
 import GoalForm from "./GoalForm";
+import Button from "./Button";
+import AnimatedCard from "./AnimatedCard";
+
+import "../styles/components/_goalslist.scss"; // Import styles for the GoalsList component
 
 const GoalsList = () => {
   const {
@@ -52,31 +56,37 @@ const GoalsList = () => {
       )}
 
       {/* Render loading or error messages */}
-      {loading && <p>Loading goals...</p>}
-      {error && <p>Error loading goals: {error}</p>}
+      {loading && (
+        <AnimatedCard key="loading" initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ duration: 0.3 }}>
+          <p>Loading goals...</p>
+        </AnimatedCard>
+      )}
+      {error && (
+        <AnimatedCard key="error" initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ duration: 0.3 }}>
+          <p>Error loading goals: {error}</p>
+        </AnimatedCard>
+      )}
 
       {/* Render the list of goals */}
-      <ul>
-        {goals.map((goal) => (
-          <li key={goal.id}>
-            <div className="goal_info">
-              <div className="goal_title">
-                <h3>{goal.title}</h3>
+      {goals.length === 0 ? (
+        <p>No goals available. Start by adding one!</p>
+      ) : (
+        <ul className="goal-wrapper">
+          {goals.map((goal) => {
+            return (
+            <li key={goal.id} className="goal-card">
+              <h3>{goal.title}</h3>
+              <p>{goal.description}</p>
+              <span>Finish by: {goal.target_hours} minutes</span>
+              <div className="edit-overlay">
+                <Button variant="primary" onClick={() => handleEditClick(goal)}>Edit</Button>
+                <Button variant="danger" onClick={() => removeGoal(goal.id)}>Delete</Button>
               </div>
-              <div className="description">
-                <p>{goal.description}</p>
-              </div>
-              <div className="target_hours">
-                <span>Finish by: {goal.target_hours} minutes</span>
-              </div>
-              <div className="buttons">
-              <button onClick={() => handleEditClick(goal)}>Edit</button>
-              <button onClick={() => removeGoal(goal.id)}>Delete</button>
-              </div>
-            </div>
-          </li>
-        ))}
-      </ul>
+            </li>
+            )
+          })}
+        </ul>
+      )}
     </div>
   )
 }

@@ -7,11 +7,12 @@
 
 Rails.application.config.middleware.insert_before 0, Rack::Cors do
   allow do
-    origins "http://localhost:5173" # Change to your frontend domain in production
+    origins "http://localhost:5173", "http://127.0.0.1:5173" # Change to your frontend domain in production
     # You can restrict origins to your React frontend URL (e.g., localhost:5173) in development if needed.
 
     resource "*",
       headers: :any,
-      methods: [:get, :post, :put, :patch, :delete, :options, :head]
+      methods: [:get, :post, :put, :patch, :delete, :options, :head],
+      credentials: true  # Required for session/cookie support
   end
 end

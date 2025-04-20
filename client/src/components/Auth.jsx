@@ -3,7 +3,7 @@ import { useDispatch } from "react-redux";
 import { loginStart, loginSuccess, loginFailure } from "../features/auth/authSlice";
 
 
-const LoginForm = () => {
+const Auth = () => {
   const dispatch = useDispatch();
 
   const [email, setEmail] = useState("");
@@ -62,4 +62,4 @@ const LoginForm = () => {
   );
 };
 
-export default LoginForm;
+export default Auth;

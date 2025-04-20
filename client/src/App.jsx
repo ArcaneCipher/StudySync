@@ -3,9 +3,8 @@ import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import Dashboard from './pages/Dashboard';
 import Study from './pages/Study';
 import Decks from "./pages/Decks";
-import GoalsList from "./components/Layout/GoalsList";
 import Auth from "./components/Auth";
-
+import GoalsList from "./components/Layout/GoalsList";
 
 function App() {
   return (

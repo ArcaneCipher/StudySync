@@ -6,44 +6,88 @@ client
 ├── package-lock.json
 ├── package.json
 ├── public
-│   └── vite.svg
+│   └── favicon.png
 ├── src
 │   ├── App.jsx
 │   ├── api
-│   │   └── axios.js
+│   │   ├── axios.js
+│   │   └── goalsApi.js
 │   ├── assets
-│   │   └── react.svg
+│   │   ├── logo.png
+│   │   └── work.png
 │   ├── components
+│   │   ├── AnimatedCard.jsx
 │   │   ├── Button.jsx
-│   │   └── Layout
-│   │       ├── Footer.jsx
-│   │       ├── Header.jsx
-│   │       └── Layout.jsx
+│   │   ├── DeckCard.jsx
+│   │   ├── Flashcard.jsx
+│   │   ├── Input.jsx
+│   │   ├── Layout
+│   │   │   ├── Footer.jsx
+│   │   │   ├── GoalForm.jsx
+│   │   │   ├── GoalsList.jsx
+│   │   │   ├── Header.jsx
+│   │   │   ├── Layout.jsx
+│   │   │   └── Sidebar.jsx
+│   │   ├── PageWrapper.jsx
+│   │   ├── TestAuth.jsx
+│   │   ├── Textarea.jsx
+│   │   ├── ToggleSwitch.jsx
+│   │   ├── UIShowcase.jsx
+│   │   └── development
+│   │       └── UserSwitcher.jsx
+│   ├── features
+│   │   ├── auth
+│   │   │   └── authSlice.js
+│   │   ├── decks
+│   │   │   └── decksSlice.js
+│   │   ├── flashcards
+│   │   │   └── flashcardsSlice.js
+│   │   ├── goals
+│   │   │   └── goalsSlice.js
+│   │   └── user
+│   │       └── userSlice.js
 │   ├── hooks
-│   │   └── useExample.js
+│   │   ├── useExample.js
+│   │   ├── useGoals.js
+│   │   └── useIsMobile.js
 │   ├── main.jsx
 │   ├── pages
-│   │   └── HomePage.jsx
+│   │   ├── Dashboard.jsx
+│   │   └── Decks.jsx
+│   ├── store.js
 │   ├── styles
 │   │   ├── base
 │   │   │   ├── _globals.scss
 │   │   │   ├── _reset.scss
-│   │   │   └── _typography.scss
+│   │   │   ├── _typography.scss
+│   │   │   └── index.scss
 │   │   ├── components
 │   │   │   ├── _app.scss
-│   │   │   └── _buttons.scss
+│   │   │   ├── _buttons.scss
+│   │   │   ├── _deckcard.scss
+│   │   │   ├── _flashcard.scss
+│   │   │   ├── _input.scss
+│   │   │   ├── _textarea.scss
+│   │   │   ├── _toggleswitch.scss
+│   │   │   ├── _uishowcase.scss
+│   │   │   └── index.scss
 │   │   ├── layouts
 │   │   │   ├── _footer.scss
 │   │   │   ├── _grid.scss
 │   │   │   ├── _header.scss
-│   │   │   └── _layout.scss
+│   │   │   ├── _layout.scss
+│   │   │   ├── _sidebar.scss
+│   │   │   └── index.scss
 │   │   ├── main.scss
 │   │   ├── pages
-│   │   │   └── _home.scss
+│   │   │   ├── _dashboard.scss
+│   │   │   ├── _decks.scss
+│   │   │   └── index.scss
 │   │   └── utils
-│   │       └── _variables.scss
+│   │       ├── _variables.scss
+│   │       └── index.scss
 │   └── utils
 │       └── helpers.js
 └── vite.config.js
 
-15 directories, 31 files
+22 directories, 68 files

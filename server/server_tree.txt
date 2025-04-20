@@ -1,4 +1,4 @@
-.
+server
 ├── Dockerfile
 ├── Gemfile
 ├── Gemfile.lock
@@ -12,21 +12,73 @@
 │   ├── controllers
 │   │   ├── api
 │   │   │   └── v1
-│   │   │       └── example_controller.rb
+│   │   │       ├── dashboard_controller.rb
+│   │   │       ├── decks_controller.rb
+│   │   │       ├── flashcard_reviews_controller.rb
+│   │   │       ├── flashcards_controller.rb
+│   │   │       ├── goals_controller.rb
+│   │   │       ├── sessions_controller.rb
+│   │   │       ├── study_sessions_controller.rb
+│   │   │       └── users_controller.rb
 │   │   ├── application_controller.rb
-│   │   └── concerns
+│   │   ├── concerns
+│   │   └── welcome_controller.rb
 │   ├── jobs
 │   │   └── application_job.rb
 │   ├── mailers
 │   │   └── application_mailer.rb
 │   ├── models
+│   │   ├── activity_log.rb
+│   │   ├── ai_request.rb
 │   │   ├── application_record.rb
-│   │   └── concerns
+│   │   ├── badge.rb
+│   │   ├── challenge.rb
+│   │   ├── comment.rb
+│   │   ├── concerns
+│   │   ├── deck.rb
+│   │   ├── flashcard.rb
+│   │   ├── flashcard_review.rb
+│   │   ├── following.rb
+│   │   ├── goal.rb
+│   │   ├── media_upload.rb
+│   │   ├── notification.rb
+│   │   ├── reaction.rb
+│   │   ├── reflection.rb
+│   │   ├── study_session.rb
+│   │   ├── tag.rb
+│   │   ├── tagging.rb
+│   │   ├── user.rb
+│   │   ├── user_badge.rb
+│   │   ├── user_challenge.rb
+│   │   ├── user_setting.rb
+│   │   └── xp_log.rb
 │   └── views
 │       ├── api
 │       │   └── v1
-│       │       └── example
-│       │           └── index.json.jbuilder
+│       │       ├── dashboard
+│       │       │   └── show.json.jbuilder
+│       │       ├── decks
+│       │       │   ├── _deck.json.jbuilder
+│       │       │   ├── index.json.jbuilder
+│       │       │   └── show.json.jbuilder
+│       │       ├── flashcard_reviews
+│       │       │   ├── _flashcard_review.json.jbuilder
+│       │       │   ├── queue.json.jbuilder
+│       │       │   └── show.json.jbuilder
+│       │       ├── flashcards
+│       │       │   ├── _flashcard.json.jbuilder
+│       │       │   ├── index.json.jbuilder
+│       │       │   └── show.json.jbuilder
+│       │       ├── goals
+│       │       │   ├── _goal.json.jbuilder
+│       │       │   ├── index.json.jbuilder
+│       │       │   └── show.json.jbuilder
+│       │       ├── study_sessions
+│       │       │   ├── _study_session.json.jbuilder
+│       │       │   ├── index.json.jbuilder
+│       │       │   └── show.json.jbuilder
+│       │       └── users
+│       │           └── show.json.jbuilder
 │       └── layouts
 │           ├── mailer.html.erb
 │           └── mailer.text.erb
@@ -52,16 +104,39 @@
 │   │   └── inflections.rb
 │   ├── locales
 │   │   └── en.yml
-│   ├── master.key
 │   ├── puma.rb
 │   ├── routes.rb
 │   └── storage.yml
 ├── config.ru
 ├── db
+│   ├── migrate
+│   │   ├── 20250413021029_create_users.rb
+│   │   ├── 20250413021144_create_goals.rb
+│   │   ├── 20250413021157_create_study_sessions.rb
+│   │   ├── 20250413021205_create_decks.rb
+│   │   ├── 20250413021217_create_flashcards.rb
+│   │   ├── 20250413021222_create_flashcard_reviews.rb
+│   │   ├── 20250413021228_create_notifications.rb
+│   │   ├── 20250413021235_create_user_settings.rb
+│   │   ├── 20250413021241_create_tags.rb
+│   │   ├── 20250413021247_create_taggings.rb
+│   │   ├── 20250413021906_create_followings.rb
+│   │   ├── 20250413033159_create_reactions.rb
+│   │   ├── 20250413033211_create_activity_logs.rb
+│   │   ├── 20250413033251_create_badges.rb
+│   │   ├── 20250413033257_create_user_badges.rb
+│   │   ├── 20250413033304_create_xp_logs.rb
+│   │   ├── 20250413033309_create_reflections.rb
+│   │   ├── 20250413033314_create_comments.rb
+│   │   ├── 20250413033320_create_media_uploads.rb
+│   │   ├── 20250413033326_create_challenges.rb
+│   │   ├── 20250413033336_create_user_challenges.rb
+│   │   └── 20250413033341_create_ai_requests.rb
 │   ├── schema.rb
 │   └── seeds.rb
 ├── lib
 │   └── tasks
+│       └── db.rake
 └── server_tree.txt
 
-24 directories, 40 files
+31 directories, 108 files

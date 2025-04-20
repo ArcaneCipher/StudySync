@@ -35,11 +35,12 @@ const Auth = () => {
   };
 
   return (
-    <form onSubmit={handleSubmit}>
+    <form onSubmit={handleSubmit} className="auth-form">
       <h2>Login</h2>
-      <div>
-        <label>Email:</label>
+      <div className="form-field">
+        <label htmlFor="email">Email</label>
         <input
+          id="email"
           type="email"
           value={email}
           onChange={(e) => setEmail(e.target.value)}
@@ -47,9 +48,10 @@ const Auth = () => {
         />
       </div>
 
-      <div>
-        <label>Password:</label>
+      <div className="form-field">
+        <label htmlFor="password">Password</label>
         <input
+          id="password"
           type="password"
           value={password}
           onChange={(e) => setPassword(e.target.value)}

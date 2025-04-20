@@ -1,7 +1,41 @@
 @use '../utils/variables' as *;
+
 #root {
   padding: 20px;
   min-height: 100vh;
   display: flex;
   flex-direction: column;
+}
+
+body {
+  background-color: #f9fafb;
+  color: #1f2937;
+  margin: 0;
+  font-family: 'Inter', sans-serif;
+}
+
+
+/* Kat - Auth Logo */
+.logo {
+  font-size: 2.5rem;
+  font-weight: bold;
+  padding: 0;
+}
+
+/* === Main App Content Layout === */
+.main-content {
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  padding-top: 2rem;
+  background-color: #f9fafb;
+  min-height: 100vh;
+}
+
+.card {
+  padding: 2em;
+}
+
+.read-the-docs {
+  color: #888;
 }

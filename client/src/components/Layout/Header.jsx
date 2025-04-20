@@ -34,6 +34,8 @@ const getFormattedDateParts = () => {
 const Header = () => {
   const dispatch = useDispatch();
   const { user, isAuthenticated } = useSelector((state) => state.user);
+  const location = useLocation();
+  const isAuthPage = location.pathname === "/";
 
   const handleAuthToggle = () => {
      if (isAuthenticated) {

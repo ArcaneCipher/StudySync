@@ -34,6 +34,14 @@
     resize: vertical;
     max-height: 150px;
   }
+
+  .char-count {
+    font-size: 0.8rem;
+    color: #777;
+    margin-top: 0.25rem;
+    text-align: right;
+  }
+  
 }
 
 .new_goal_targetHours {

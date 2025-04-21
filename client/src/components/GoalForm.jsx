@@ -54,8 +54,9 @@ const GoalForm = ({ goal = null, onSave, onCancel }) => {
         <textarea
           value={description}
           onChange={(e) => setDescription(e.target.value)}
-          maxLength={500}
+          maxLength={200}
         />
+        <div className="char-count">{description.length} / 200</div>
       </div>
 
       <div className="new_goal_targetHours">

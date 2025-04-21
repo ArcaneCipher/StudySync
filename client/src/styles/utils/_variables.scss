@@ -1,11 +1,59 @@
-// color
+// scss/_variables.scss
 
-$primary: #2e3235;
-$purple: #8376be;
-$purple1: #d9d5ec;
-$grey: #f9f8fc;
-$white: #ffffff;
+// Define base colors (used to inject into :root)
+$primary-light: #2e3235;
+$purple-light: #8376be;
+$purple1-light: #d9d5ec;
+$purple2-light: #6453ae;
+$grey-light: #f9f8fc;
+$grey1-light: #f0f4f8;
+$white-light: #ffffff;
+$red-light: #c10d1a;
+$border-light: #dddddd;
 
+// Define CSS custom properties
+:root {
+  --primary: #{$primary-light};
+  --purple: #{$purple-light};
+  --purple1: #{$purple1-light};
+  --purple2: #{$purple2-light};
+  --grey: #{$grey-light};
+  --grey1: #{$grey1-light};
+  --white: #{$white-light};
+  --red: #{$red-light};
+  --card: #{$grey1-light};
+  --border: #{$border-light};
+  --background: #{$white-light};
+}
+
+// Dark mode overrides
+@media (prefers-color-scheme: dark) {
+  :root {
+    --primary: #E4E4E4;
+    --purple: #6453ae;
+    --purple1: #3e375f;
+    --purple2: #3e375f;
+    --grey: #2a2a2a;
+    --grey1: #3a3a3a;
+    --white: #eaeaea;
+    --red: #ff4c58;
+    --background: #2C2C2C;
+    --card: #4e4e4e;
+    --border: #4e4e4e;
+  }
+}
+
+// SCSS variable aliases (always available, map to CSS vars)
+$primary: var(--primary);
+$purple: var(--purple);
+$purple1: var(--purple1);
+$purple2: var(--purple2);
+$grey: var(--grey);
+$grey1: var(--grey1);
+$white: var(--white);
+$red: var(--red);
+$whitebg: var(--background);
+$border: var(--border);
 // margin
 
 $mt0:0;

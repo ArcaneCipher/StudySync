@@ -8,6 +8,7 @@ import ToggleSwitch from './ToggleSwitch';
 import AnimatedCard from './AnimatedCard';
 import { AnimatePresence } from "framer-motion";
 import { CircleX, SquarePen, Trash2 } from 'lucide-react'; 
+import useIsMobile from '../hooks/useIsMobile';
 
 // DeckCard component displays a deck and conditionally allows editing
 const DeckCard = ({
@@ -22,6 +23,7 @@ const DeckCard = ({
 }) => {
   const isEditing = editingDeckId === deck.id; // check if this deck is being edited
 
+  const isMobile = useIsMobile(768);
   return (
     <>
       <div className='deck-wrapper'>
@@ -32,7 +34,7 @@ const DeckCard = ({
 
           {/* Mobile-only button row for Study and Edit/Delete */}
           <div className='mobile-btn-row'>
-            <Button variant='primary'>
+            <Button variant={`${isMobile ? 'secondary-reverse' : 'primary'}`}>
               <Link to={`/study/${deck.id}`}>Study</Link>
             </Button>
 

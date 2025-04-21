@@ -32,7 +32,26 @@
       line-height: 42px;
     }
     &:hover {
-      background-color: darken($purple, 10%);
+     // background-color: darken($purple, 10%);
+     background-color: $purple2;
+    }
+  }
+  &.secondary-reverse {
+    background: transparent;
+    border: 2px solid $white;
+    color: $white;
+
+    &:hover {
+      background-color: $grey;
+    }
+    a {
+      color: $white;
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      left: 0;
+      top: 0;
+      line-height: 42px;
     }
   }
   &.secondary {
@@ -50,6 +69,14 @@
 
     &:hover {
       background-color: $grey;
+    }
+  }
+  &.red {
+    background: $red;
+    color: $white;
+    margin-bottom: .75rem;
+    &:hover {
+      background-color: $red;
     }
   }
 }

@@ -1,0 +1,132 @@
+@use '../utils/variables' as *;
+.flashcard {
+  height: 250px;
+  width: 200px;
+  perspective: 1000px;
+  position: relative;
+  transition: width 0.3s ease, height 0.3s ease;
+  border-radius: 1rem;
+  cursor: pointer;
+
+  &.expand {
+    position: fixed;
+    width: 500px;
+    max-height: 600px;
+    height: 100%;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%) !important;
+    z-index: 999;
+
+    .front, .back{
+      box-shadow: 0 7px 12px rgb(0 0 0 / 9%);
+      height: max-content;
+    }
+  }
+  h3 {
+    margin-top: 0;
+    display: -webkit-box;
+    -webkit-line-clamp: 3;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    font-size: 1rem;
+    font-weight: 600;
+  }
+  .front, .back {
+    width: 100%;
+    height: 100%;
+    border-radius: 1rem;
+    background-color: $grey1;
+    display: flex;
+    flex-direction: column;
+    font-size: 1rem;
+    font-weight: 500;
+    backface-visibility: hidden;
+    position: absolute;
+    top: 0;
+    left: 0;
+    padding: 1.25rem;
+    transition: transform 0.6s ease;
+    border: 1px solid transparent;
+
+  }
+  .lucide-expand {
+    position: absolute;
+    left: 20px;
+    bottom: 20px;
+  }
+  .lucide-circle-x {
+    position: absolute;
+    top: -8px;
+    right: -8px;
+    background-color: #2e3235;
+    color: #ffffff;
+    transition: all 0.3s ease-in;
+    border-radius: 100%;
+    z-index: 9;
+  }
+  .back {
+   // background-color: $whitebg;
+    transform: rotateY(180deg);
+    border:1px dashed $border;
+    p {
+      max-height: 400px;
+      overflow: auto;
+      &::-webkit-scrollbar {
+        width: 2px;
+      }
+      &::-webkit-scrollbar-track {
+        border-radius: 0;
+        background: $grey;
+      }
+      &::-webkit-scrollbar-thumb {
+        border-radius: 0;
+        background: #b0b0b0;
+      }
+    }
+  }
+
+  &.flip .front {
+    transform: rotateY(180deg);
+  }
+
+  &.flip .back {
+    transform: rotateY(360deg);
+  }
+  button {
+    width: max-content;
+  }
+
+  .rating-options {
+    display: flex;
+    margin-bottom: 1.25rem;
+    border-radius: 6px;
+    gap: 20px; 
+    button {
+      flex: 1;    
+      justify-content: center;
+  
+      &.selected {
+        background: $purple;
+        color: $white;
+        border-color: $purple;
+      }
+    }
+  }
+  
+}
+
+
+@media(max-width:1199px) {
+  .flashcard {
+    width: calc(33% - 11px);
+  }
+}
+@media (max-width: 767px) {
+  .flashcard {
+    width: calc(50% - 10px);
+    &.expand {
+      width: calc(100% - 40px);
+    }
+  }
+}

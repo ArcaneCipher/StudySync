@@ -1,0 +1,21 @@
+.background-study, .foreground-study{
+  position: fixed;
+  width: 100%;
+  height: 100vh;
+  left: 0;
+  top: 0;
+  background: #f9f8fc;
+  z-index: 99;
+  h2 {
+    font-size: 5rem;
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    margin: 0;
+    color: #ecebf0;
+  }
+}
+.foreground-study{
+  z-index: 100;
+}

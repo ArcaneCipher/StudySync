@@ -26,7 +26,7 @@
     .handle {
       width: 22px;
       height: 22px;
-      background-color: #fff;
+      background-color: $whitebg;
       border-radius: 50%;
       position: absolute;
       top: 2px;
@@ -38,6 +38,6 @@
   .label {
     font-size: 0.9rem;
     font-weight: 500;
-    color: #333;
+    color: $primary;
   }
 }

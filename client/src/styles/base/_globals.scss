@@ -1,4 +1,5 @@
 @use '../utils/variables' as *;
+
 :root {
   font-family: system-ui, Avenir, Helvetica, Arial, sans-serif;
   line-height: 1.5;
@@ -20,8 +21,19 @@ body {
   font-family: "Poppins", sans-serif;
   color: $primary;
   position: relative;
+  background-color: $whitebg;
 }
-
+*::-webkit-scrollbar {
+  width: 2px;
+}
+*::-webkit-scrollbar-track {
+  border-radius: 0;
+  background: $grey;
+}
+*::-webkit-scrollbar-thumb {
+  border-radius: 0;
+  background: #b0b0b0;
+}
 h1 {
   font-size: 3.2em;
   line-height: 1.1;
@@ -36,7 +48,18 @@ a {
     color: $purple;
   }
 }
-
+.flex{
+  display: flex;
+}
+.align-items-center {
+  align-items: center;
+}
+.gap10 {
+  gap: 10px;
+}
+.m0{
+  margin: 0;
+}
 .mt0{
   margin-top: 0;
 }
@@ -58,6 +81,12 @@ a {
 .mt30{
   margin-top: 30px;
 }
+.mb0{
+  margin-bottom: 0;
+}
+.mb1{
+  margin-bottom: 1rem;
+}
 .transtion {
   transition: all .5s ease-in;
 }
@@ -67,20 +96,7 @@ a {
 .opacity-1 {
   opacity: 1;
 }
-@media (prefers-color-scheme: light) {
-  :root {
-    color: $primary;
-    background-color: $white
-  }
 
-  a:hover {
-    color: $purple;
-  }
-
-  button {
-    background-color: #f9f9f9;
-  }
-}
 
 *,*::after,*::before{
   box-sizing: border-box;

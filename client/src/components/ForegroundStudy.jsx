@@ -39,7 +39,8 @@ const ForegroundStudy = () => {
   // Select flashcards, status, and error from Redux store for the current deck
   const flashcardData = useSelector((state) => state.flashcards.byDeckId[deckId]);
   const flashcards = flashcardData?.flashcards || [];
-  const status = flashcardData?.status === 'loading';
+ //  const isLoading = flashcardData?.status === 'loading';
+  const isLoading = !flashcardData || flashcardData.status === 'loading';
   const error = flashcardData?.error;
 
   // Fetch flashcards
@@ -55,8 +56,8 @@ const ForegroundStudy = () => {
   return (
     <div className='foreground-study'>
       <Link className='flex align-items-center gap10 mb1' to="/decks"><ArrowLeft /> Decks</Link>
-      {status === 'loading' ? (
-        <p>Loading flashcards...</p>
+      { isLoading ?  (
+        <p className='no-flashcards'> </p>
       ) : (
         flashcards.length > 0 ? (
           <div className='flashcards-study' ref={ref}> 

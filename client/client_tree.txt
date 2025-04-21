@@ -17,9 +17,12 @@ client
 │   │   └── work.png
 │   ├── components
 │   │   ├── AnimatedCard.jsx
+│   │   ├── BackgroundStudy.jsx
 │   │   ├── Button.jsx
 │   │   ├── DeckCard.jsx
 │   │   ├── Flashcard.jsx
+│   │   ├── FlashcardStudy.jsx
+│   │   ├── ForegroundStudy.jsx
 │   │   ├── Input.jsx
 │   │   ├── Layout
 │   │   │   ├── Footer.jsx
@@ -53,7 +56,8 @@ client
 │   ├── main.jsx
 │   ├── pages
 │   │   ├── Dashboard.jsx
-│   │   └── Decks.jsx
+│   │   ├── Decks.jsx
+│   │   └── Study.jsx
 │   ├── store.js
 │   ├── styles
 │   │   ├── base
@@ -63,9 +67,10 @@ client
 │   │   │   └── index.scss
 │   │   ├── components
 │   │   │   ├── _app.scss
+│   │   │   ├── _backgroundstudy.scss
 │   │   │   ├── _buttons.scss
 │   │   │   ├── _deckcard.scss
-│   │   │   ├── _flashcard.scss
+│   │   │   ├── _flashcardStudy.scss
 │   │   │   ├── _input.scss
 │   │   │   ├── _textarea.scss
 │   │   │   ├── _toggleswitch.scss
@@ -82,6 +87,7 @@ client
 │   │   ├── pages
 │   │   │   ├── _dashboard.scss
 │   │   │   ├── _decks.scss
+│   │   │   ├── _study.scss
 │   │   │   └── index.scss
 │   │   └── utils
 │   │       ├── _variables.scss
@@ -90,4 +96,4 @@ client
 │       └── helpers.js
 └── vite.config.js
 
-22 directories, 68 files
+22 directories, 74 files

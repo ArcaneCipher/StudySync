@@ -2,7 +2,7 @@ import { useState, useEffect } from "react";
 import "../styles/components/_goalform.scss"; // Import styles for the GoalForm component
 
 // GoalForm component to add or edit goals
-const GoalForm = ({ goal = null, onSave, onCancel }) => {
+const GoalForm = ({ goal, onSave, onCancel }) => {
   const [title, setTitle] =  useState("");
   const [description, setDescription] = useState("");
   const [targetHours, setTargetHours] = useState("");
@@ -26,7 +26,7 @@ const GoalForm = ({ goal = null, onSave, onCancel }) => {
 
     const goalData = {
       goal: {
-        user_id: 1, // Replace with actual logged-in user ID later
+        user_id, // Replace with actual logged-in user ID later
         title,
         description,
         target_hours: Number(targetHours), // Convert target hours to a number
@@ -43,6 +43,7 @@ const GoalForm = ({ goal = null, onSave, onCancel }) => {
         <label>Title:</label>
         <input 
         type="text"
+        id="title"
         value={title}
         onChange={(e) => setTitle(e.target.value)}
         required
@@ -52,6 +53,7 @@ const GoalForm = ({ goal = null, onSave, onCancel }) => {
       <div className="new_goal_description">
         <label>Description:</label>
         <textarea
+          id="description"
           value={description}
           onChange={(e) => setDescription(e.target.value)}
           maxLength={200}
@@ -60,9 +62,10 @@ const GoalForm = ({ goal = null, onSave, onCancel }) => {
       </div>
 
       <div className="new_goal_targetHours">
-        <label>Target Hours:</label>
+        <label htmlFor="targetHours">Target Hours:</label>
         <input
           type="number"
+          id="targetHours"
           value={targetHours}
           onChange={(e) => setTargetHours(e.target.value)}
           min="0"

@@ -1,3 +1,4 @@
+@use '../utils/variables' as *;
 .btn-deck-create{
   position: absolute;
   right: 20px;
@@ -5,7 +6,7 @@
 }
 .deck-create {
   padding: 1.5rem;
-  border: 1px solid #ddd;
+  border: 1px solid $border;
   border-radius: 1rem;
   h2 {
     margin-top: 0;

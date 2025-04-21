@@ -5,7 +5,7 @@
   top: 20px;
   left: 20px;
   bottom: 20px;
-  background: #f9f8fc;
+  background: $grey1;
   border-radius: 10px;
   padding: 30px;
   display: flex;
@@ -76,5 +76,14 @@
     transform: translateX(0);
     left: 0;
     z-index: 99;
+  }
+}
+
+
+@media (prefers-color-scheme: dark) {
+  .sidebar {
+    .logo {
+      filter: brightness(10);
+    }
   }
 }

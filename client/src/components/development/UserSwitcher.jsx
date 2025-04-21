@@ -54,23 +54,13 @@ const DevUserSwitcher = () => {
         Logged in as: <strong>{user?.username || "None"}</strong>
       </p>
       {demoUsers.map((demoUser) => (
-        <button
+        <Button
           key={demoUser.email}
           onClick={() => handleSwitch(demoUser)}
-          style={{
-            fontSize: "0.75rem",
-            margin: "2px 0",
-            padding: "4px 6px",
-            borderRadius: "4px",
-            backgroundColor: "#be1b1b",
-            border: "1px solid #ccc",
-            cursor: "pointer",
-            width: "100%",
-            textAlign: "left",
-          }}
+          variant="red"
         >
           {demoUser.username}
-        </button>
+        </Button>
       ))}
     </div>
   );

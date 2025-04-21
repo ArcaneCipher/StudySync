@@ -1,6 +1,7 @@
 import Layout from "./components/Layout/Layout";
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import Dashboard from './pages/Dashboard';
+import Study from './pages/Study';
 import Decks from "./pages/Decks";
 // import TestAuth from "./components/TestAuth"; // ⚠️ Remove when done testing Auth ⚠️
 import TestAuth from "./components/TestAuth"; // ⚠️ Remove when done testing Auth ⚠️
@@ -14,7 +15,7 @@ function App() {
           {/* <TestAuth /> // ⚠️ Remove when done testing Auth ⚠️ */}
           <Routes location={location} key={location.pathname}>
             <Route path="/" element={<Dashboard />} />
-            <Route path="/goals" element={<></> } />
+            <Route path="/study/:deckId" element={<Study /> } />
             <Route path="/decks" element={<Decks />} />
             <Route path="/goals" element={<GoalsList />} />
           </Routes>

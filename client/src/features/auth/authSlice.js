@@ -26,7 +26,6 @@ const authSlice = createSlice({
   }
 });
 
-
 export const {
   loginStart,
   loginSuccess,

@@ -1,7 +1,26 @@
 @use '../utils/variables' as *;
+
 #root {
   padding: 20px;
   min-height: 100vh;
   display: flex;
   flex-direction: column;
+}
+
+/* === Main App Content Layout === */
+.main-content {
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  padding-top: 2rem;
+  background-color: #f9fafb;
+  min-height: 100vh;
+}
+
+.card {
+  padding: 2em;
+}
+
+.read-the-docs {
+  color: #888;
 }

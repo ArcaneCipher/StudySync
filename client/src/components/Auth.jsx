@@ -36,6 +36,7 @@ const Auth = () => {
 
   return (
     <form onSubmit={handleSubmit} className="auth-form">
+      <h1 className="logo">StudySync</h1>
       <h2>Login</h2>
       <div className="form-field">
         <label htmlFor="email">Email</label>

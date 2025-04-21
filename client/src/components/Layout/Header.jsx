@@ -73,6 +73,7 @@ const Header = () => {
 
   return (
     <header>
+      <h1 className="logo">StudySync</h1>
       <h3>{title}</h3>
       <p><b>{day}</b>, {date}</p>
       <Menu className='menu-collapse' onClick={toggleCollapse} />

@@ -1,7 +1,7 @@
 .new_goal_title,
 .new_goal_description,
 .new_goal_targetHours {
-  margin-bottom: 1.5rem; // Adjust spacing to match the deck layout
+  margin-bottom: 1.5rem;
 }
 
 label {
@@ -13,16 +13,11 @@ label {
 input,
 textarea {
   width: 100%;
-  padding: 1rem; // Consistent padding size as deck card input fields
+  padding: 1rem;
   font-size: 16px;
   border: 1px solid grey;
   border-radius: 0.75rem;
   transition: all 0.3s ease-in-out;
-}
-
-textarea {
-  resize: vertical;
-  max-height: 150px;
 }
 
 button {
@@ -53,13 +48,30 @@ form {
   max-width: 600px;
   margin: 0 auto;
   padding: 2rem;
-  background-color: #f9f9f9;
+  background-color: #8376be;
   border-radius: 1rem;
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
   transition: all 0.3s ease-in-out;
+  position: relative;
 
   &:hover {
     box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+  }
+}
+
+.close-icon {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  color: black;
+  border-radius: 50%;
+  padding: 6px;
+  cursor: pointer;
+  z-index: 2;
+  transition: background-color 0.2s;
+
+  &:hover {
+    background-color: primary-dark;
   }
 }
 

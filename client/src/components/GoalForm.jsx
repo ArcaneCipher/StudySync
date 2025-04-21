@@ -1,4 +1,6 @@
 import { useState, useEffect } from "react";
+import { CircleX } from "lucide-react";
+
 import "../styles/components/_goalform.scss"; // Import styles for the GoalForm component
 
 // GoalForm component to add or edit goals
@@ -38,6 +40,7 @@ const GoalForm = ({ goal, onSave, onCancel }) => {
   return (
     <form onSubmit={handleSubmit}>
       <h3>{goal ? "Edit Goal" : "Add New Goal"}</h3>
+      <CircleX className="close-icon" onClick={onCancel} />
 
       <div className="new_goal_title">
         <label>Title:</label>
@@ -73,7 +76,6 @@ const GoalForm = ({ goal, onSave, onCancel }) => {
       </div>
 
       <button type="submit">{goal ? "Update" : "Add"} Goal</button>
-      {goal && <button type="button" onClick={onCancel}>Cancel</button>}
     </form>
   )
 }

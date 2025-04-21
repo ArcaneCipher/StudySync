@@ -3,6 +3,8 @@ import useGoals from "../hooks/useGoals";
 import GoalForm from "./GoalForm";
 import Button from "./Button";
 import AnimatedCard from "./AnimatedCard";
+import { CirclePlus } from "lucide-react";
+import { motion, AnimatePresence } from "framer-motion"; // Import motion and AnimatePresence for animations
 
 import "../styles/components/_goalslist.scss"; // Import styles for the GoalsList component
 
@@ -17,6 +19,7 @@ const GoalsList = () => {
     removeGoal,
   } = useGoals(); // Custom hook to manage goals
   
+  const [formVisible, setFormVisible] = useState(false); // State to manage the visibility of the form
   const [editingGoal, setEditingGoal] = useState(null); // State to manage the goal being edited
 
   // Load all goals when the component renders
@@ -27,6 +30,7 @@ const GoalsList = () => {
   // Handle clicking the Edit button
   const handleEditClick = (goal) => {
     setEditingGoal(goal); // Set the goal to be edited
+    setFormVisible(true); // Show the form for editing
   };
 
   // Handle Saving the edited goal
@@ -37,23 +41,47 @@ const GoalsList = () => {
       createNewGoal(goalData.goal); // Create a new goal if not editing
     }
     setEditingGoal(null); // Reset the editing goal state
+    setFormVisible(false); // Hide the form after saving
   };
 
   // Handle cancelling the edit
   const handleCancelClick = () => {
     setEditingGoal(null); // Reset the editing goal state
+    setFormVisible(false); // Hide the form
   };
 
   // Render the list of goals
   return (
     <div>
       <h2>Goals List</h2>
-      {/* Conditionally render GoalForm for adding or editing goals */}
-      {editingGoal ? (
-        <GoalForm goal={editingGoal} onSave={handleSaveClick} onCancel={handleCancelClick} />
-      ) : (
-        <GoalForm onSave={handleSaveClick} onCancel={handleCancelClick} />
+      
+      {/* Button to add a new goal */}
+      {!formVisible && !editingGoal && (
+        <div className="add-goal-btn">
+          <Button onClick={() => setFormVisible(true)} variant="primary">
+            <CirclePlus size={18} style={{ marginRight: "6px" }} />
+            Add Goal
+          </Button>
+        </div>
       )}
+
+      <AnimatePresence>
+        {(formVisible || editingGoal) && (
+          <motion.div
+            key="goal-form"
+            initial={{ opacity: 0, y: -10 }}
+            animate={{ opacity: 1, y: 0 }}
+            exit={{ opacity: 0, y: -10 }}
+            transition={{ duration: 0.3 }}
+          >
+            <GoalForm
+              goal={editingGoal}
+              onSave={handleSaveClick}
+              onCancel={handleCancelClick}
+            />
+          </motion.div>
+        )}
+      </AnimatePresence>
 
       {/* Render loading or error messages */}
       {loading && (

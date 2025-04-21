@@ -1,4 +1,7 @@
 class Reaction < ApplicationRecord
+  # Enums for Type Fields
+  enum reaction_type: {like: 0, fire: 1, clap: 2, thumbs_up: 3, thumbs_down: 4}
+
   # == Associations ==
 
   # The user who created the reaction (e.g., liked a deck or goal)

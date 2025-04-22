@@ -61,19 +61,6 @@ header {
   }
 }
 
-.welcome-text {
-  font-size: 0.9rem;
-  color: #ccc;
-  margin: 0;
-}
-
-/* === Logo Styling [Kattt] === */
-.logo {
-  height: 1em;
-  padding: 0.5em;
-  will-change: filter;
-  transition: filter 300ms;
-}
 
 @media (max-width: 1199px) {
   header .menu-collapse {

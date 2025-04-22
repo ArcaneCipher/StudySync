@@ -3,7 +3,7 @@ import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import Dashboard from './pages/Dashboard';
 import Study from './pages/Study';
 import Decks from "./pages/Decks";
-import GoalsList from "./components/Layout/GoalsList";
+import GoalsList from "./components/GoalsList";
 import Auth from "./components/Auth";
 
 function App() {

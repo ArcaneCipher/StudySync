@@ -1,5 +1,5 @@
-import { useSelector, useDispatch } from "react-redux";
-import { login, logout } from "../../features/auth/authSlice";
+// import { useSelector, useDispatch } from "react-redux";
+// import { login, logout } from "../../features/auth/authSlice";
 import { useLocation } from 'react-router-dom';
 import { useEffect, useState } from 'react';
 import { Menu } from 'lucide-react';
@@ -32,19 +32,20 @@ const getFormattedDateParts = () => {
 
 
 const Header = () => {
-  const dispatch = useDispatch();
-  const { user, isAuthenticated } = useSelector((state) => state.user);
+  
+  //const dispatch = useDispatch();
+  //const { user, isAuthenticated } = useSelector((state) => state.user);
   const location = useLocation();
-  const isAuthPage = location.pathname === "/";
+  //const isAuthPage = location.pathname === "/";
 
-  const handleAuthToggle = () => {
-     if (isAuthenticated) {
-       dispatch(logout());
-     } else {
-       dispatch(login({ name: "Alice", email: "alice@example.com" }));
-     }
-   };
-  const location = useLocation();
+  // const handleAuthToggle = () => {
+  //    if (isAuthenticated) {
+  //      dispatch(logout());
+  //    } else {
+  //      dispatch(login({ name: "Alice", email: "alice@example.com" }));
+  //    }
+  //  };
+
   const [title, setTitle] = useState('');
   const [isCollapse, setIsCollapse] = useState(true);
   const { day, date } = getFormattedDateParts();
@@ -73,24 +74,9 @@ const Header = () => {
 
   return (
     <header>
-      { isAuthPage ? (<h1 className="logo">StudySync</h1> ) : (
-        <h3>{title}</h3>
-        <p><b>{day}</b>, {date}</p>
-      )}
-      
-      
+      <h3>{title}</h3>
+      <p><b>{day}</b>, {date}</p>      
       <Menu className='menu-collapse' onClick={toggleCollapse} />
-
-      <div className="auth-section">
-        <button onClick={handleAuthToggle} className="auth-button">
-          {isAuthenticated ? "Logout" : "Login"}
-        </button>
-        {isAuthenticated && (
-          <p className="welcome-text">
-            Welcome, {user.name} ({user.email})
-          </p>
-        )}
-      </div>
     </header>
   );
 };

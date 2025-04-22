@@ -1,10 +1,10 @@
 @use '../utils/variables' as *;
-.btn-deck-create{
+.btn-create{
   position: absolute;
   right: 20px;
   top: 20px;
 }
-.deck-create {
+.deck-goal-create {
   padding: 1.5rem;
   border: 1px solid $border;
   border-radius: 1rem;
@@ -14,13 +14,13 @@
 }
 
 @media(max-width:1199px) {
-  .btn-deck-create {
+  .btn-create {
     right: 60px;
   }
 }
 
 @media(max-width:767px) {
-  .btn-deck-create {
+  .btn-create {
     position: relative;
     right: auto;
     top: 0;
@@ -28,7 +28,7 @@
     justify-content: end;
     margin-bottom: 1rem;
   }
-  .deck-create {
+  .deck-goal-create {
     margin: 1.25rem 0;
   }
 }

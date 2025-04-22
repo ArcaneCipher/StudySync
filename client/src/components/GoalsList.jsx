@@ -53,14 +53,11 @@ const GoalsList = () => {
   // Render the list of goals
   return (
     <div>
-      <h2>Goals List</h2>
-      
       {/* Button to add a new goal */}
       {!formVisible && !editingGoal && (
-        <div className="add-goal-btn">
+        <div className="btn-create">
           <Button onClick={() => setFormVisible(true)} variant="primary">
-            <CirclePlus size={18} style={{ marginRight: "6px" }} />
-            Add Goal
+            Add New Goal <CirclePlus />
           </Button>
         </div>
       )}
@@ -73,6 +70,7 @@ const GoalsList = () => {
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: -10 }}
             transition={{ duration: 0.3 }}
+            className="deck-goal-create"
           >
             <GoalForm
               goal={editingGoal}

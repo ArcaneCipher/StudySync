@@ -1,5 +1,8 @@
 import { useState, useEffect } from "react";
 import { CircleX } from "lucide-react";
+import Button from './Button';
+import Input from './Input';
+import Textarea from './Textarea';
 
 import "../styles/components/_goalform.scss"; // Import styles for the GoalForm component
 
@@ -28,7 +31,7 @@ const GoalForm = ({ goal, onSave, onCancel }) => {
 
     const goalData = {
       goal: {
-        user_id, // Replace with actual logged-in user ID later
+        user_id: 1, // Replace with actual logged-in user ID later
         title,
         description,
         target_hours: Number(targetHours), // Convert target hours to a number
@@ -38,45 +41,44 @@ const GoalForm = ({ goal, onSave, onCancel }) => {
   };
 
   return (
-    <form onSubmit={handleSubmit}>
+    <div className="goal-form">
+      <form onSubmit={handleSubmit}>
       <h3>{goal ? "Edit Goal" : "Add New Goal"}</h3>
-      <CircleX className="close-icon" onClick={onCancel} />
+      
 
-      <div className="new_goal_title">
-        <label>Title:</label>
-        <input 
+      <Input 
         type="text"
         id="title"
         value={title}
         onChange={(e) => setTitle(e.target.value)}
         required
-        />
-      </div>
+        label="Title"
+      />
 
-      <div className="new_goal_description">
-        <label>Description:</label>
-        <textarea
-          id="description"
-          value={description}
-          onChange={(e) => setDescription(e.target.value)}
-          maxLength={200}
-        />
-        <div className="char-count">{description.length} / 200</div>
-      </div>
+      <Textarea 
+        value={description}
+        onChange={(e) => setDescription(e.target.value)}
+        maxLength={200}
+        id="description"
+        label="Description"
+      />
+      <div className="char-count">{description.length} / 200</div>
 
-      <div className="new_goal_targetHours">
-        <label htmlFor="targetHours">Target Hours:</label>
-        <input
-          type="number"
-          id="targetHours"
-          value={targetHours}
-          onChange={(e) => setTargetHours(e.target.value)}
-          min="0"
-        />
+      <Input 
+        type="number"
+        id="targetHours"
+        value={targetHours}
+        onChange={(e) => setTargetHours(e.target.value)}
+        min="0"
+        label="Target Hours"
+      />
+      <div className="btn-row mt20">
+        <Button type="submit">{goal ? "Update" : "Create"} Goal</Button>
+        <Button variant='secondary' onClick={onCancel}>Cancel</Button>
       </div>
-
-      <button type="submit">{goal ? "Update" : "Add"} Goal</button>
+      
     </form>
+    </div>
   )
 }
 

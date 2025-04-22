@@ -81,7 +81,7 @@ const Decks = () => {
   return (
     <>
       {/* Button to open new deck creation form */}
-      <div className="btn-deck-create">
+      <div className="btn-create">
         <Button variant="primary" onClick={handleNewDeck}>
           Add New Deck <CirclePlus />
         </Button>
@@ -90,7 +90,7 @@ const Decks = () => {
       {/* New deck creation form with animation */}
       <AnimatePresence mode="wait">  
         {addNewDeck && (
-          <motion.div className='deck-create'
+          <motion.div className='deck-goal-create'
             key="decks"
             initial={{ opacity: 0, y: -30 }}
             animate={{ opacity: 1, y: 0 }}

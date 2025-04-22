@@ -1,7 +1,9 @@
 import React, { useState } from "react";
 import { useDispatch } from "react-redux";
 import { loginStart, loginSuccess, loginFailure } from "../features/auth/authSlice";
-
+import Button from './Button';
+import Input from './Input';
+import logo from '../assets/logo.png';
 
 const Auth = () => {
   const dispatch = useDispatch();
@@ -35,33 +37,37 @@ const Auth = () => {
   };
 
   return (
-    <form onSubmit={handleSubmit} className="auth-form">
-      <h1 className="logo">StudySync</h1>
-      <h2>Login</h2>
-      <div className="form-field">
-        <label htmlFor="email">Email</label>
-        <input
-          id="email"
-          type="email"
-          value={email}
-          onChange={(e) => setEmail(e.target.value)}
-          required
-        />
+    <div className="login">
+      <div>
+        <div className="studysync-intro">
+          <h1>Master Anything,<br /> One Flashcard at a Time.</h1>
+          <p>
+            StudySync helps you remember more in less time with smart, spaced repetition flashcards. Whether you're prepping for exams or learning new skills — we've got you covered.
+          </p>
+        </div>
       </div>
-
-      <div className="form-field">
-        <label htmlFor="password">Password</label>
-        <input
-          id="password"
-          type="password"
-          value={password}
-          onChange={(e) => setPassword(e.target.value)}
-          required
-        />
+      <div>
+        <form onSubmit={handleSubmit} className="auth-form">
+          <img src={logo} alt="StudySync" className="logo"/>
+          <Input 
+            type="email"
+            value={email}
+            id="email"
+            onChange={(e) => setEmail(e.target.value)}
+            label="Email"
+            required />
+            <Input 
+              id="password"
+              type="password"
+              value={password}
+              onChange={(e) => setPassword(e.target.value)}
+              label="Password"
+              required 
+            />
+            <Button variant="primary" type="submit">Login</Button>
+        </form>
       </div>
-
-      <button type="submit">Login</button>
-    </form>
+    </div>
   );
 };
 

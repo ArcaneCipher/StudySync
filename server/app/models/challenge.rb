@@ -1,4 +1,7 @@
 class Challenge < ApplicationRecord
+  # Enums for Type Fields
+  enum challenge_type: {daily: 0, weekly: 1, custom: 2}
+
   # == Associations ==
 
   # A challenge can be completed by many users

@@ -1,4 +1,7 @@
 class Tag < ApplicationRecord
+  # If tag logic gets complex (filtering, autocomplete, nested tags),
+  # Rails gems like acts-as-taggable-on offer helpers.
+
   # == Associations ==
 
   # A tag can be applied to many taggable entities (goals, decks, etc.)

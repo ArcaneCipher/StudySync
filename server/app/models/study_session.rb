@@ -1,3 +1,4 @@
+study_session.rb
 class StudySession < ApplicationRecord
   # == Associations ==
 

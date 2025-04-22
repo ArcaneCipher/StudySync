@@ -31,7 +31,7 @@ module Api
 
       private
 
-      # Strong params to permit only allowed attributes
+      # Params to permit only allowed attributes
       def study_session_params
         params.require(:study_session).permit(:user_id, :goal_id, :duration_min, :notes)
       end

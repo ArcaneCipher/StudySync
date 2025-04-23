@@ -7,6 +7,7 @@ import { ArrowLeft } from 'lucide-react';
 import FlashcardStudy from '../components/FlashcardStudy';
 import { motion } from "framer-motion";
 
+
 const ForegroundStudy = () => {
 
   const [flippedCards, setFlippedCards] = useState({});
@@ -63,7 +64,8 @@ const ForegroundStudy = () => {
           <div className='flashcards-study' ref={ref}> 
             {flashcards.map(card => (
               <FlashcardStudy key={card.id}    
-                reference={ref}             
+                reference={ref}    
+                flashcard_id={card.id}         
                 front_text={card.front_text}
                 back_text={card.back_text}
                 isFlip={!!flippedCards[card.id]}

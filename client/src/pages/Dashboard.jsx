@@ -1,6 +1,7 @@
 
 import work from "../assets/work.png";	
-import UIShowcase from "../components/UIShowcase";
+import ReviewQueue from '../components/ReviewQueue';
+import { CalendarSync } from "lucide-react";
 export default function HomePage() {
   return (
     <>
@@ -9,7 +10,12 @@ export default function HomePage() {
         <p>Ready to start your day with some decks?</p>
         <img src={work} className="work" alt="StudySync logo" />
       </div>
-      <UIShowcase />
+      <div className="grid-container mt20">
+        <div className="grid-col-3">
+          <h2 className="grid-title"><span className="icon yellow"><CalendarSync /></span> Spaced Repetition</h2>
+          <ReviewQueue />
+        </div>
+      </div>
     </>
   );
 }

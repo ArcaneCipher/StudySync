@@ -16,3 +16,19 @@
     width: 300px;
   }
 }
+.grid-title{
+  display: flex;
+  align-items: center;
+  .icon {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    margin-right: 0.5rem;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    &.yellow {
+      background-color: $yellow;
+    }
+  }
+}

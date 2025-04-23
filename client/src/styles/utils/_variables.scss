@@ -10,6 +10,7 @@ $grey1-light: #f0f4f8;
 $white-light: #ffffff;
 $red-light: #c10d1a;
 $border-light: #dddddd;
+$yellow-light: #f4e399;
 
 // Define CSS custom properties
 :root {
@@ -20,6 +21,7 @@ $border-light: #dddddd;
   --grey: #{$grey-light};
   --grey1: #{$grey1-light};
   --white: #{$white-light};
+  --yellow: #{$yellow-light};
   --red: #{$red-light};
   --card: #{$grey1-light};
   --border: #{$border-light};
@@ -40,6 +42,7 @@ $border-light: #dddddd;
     --background: #2C2C2C;
     --card: #4e4e4e;
     --border: #4e4e4e;
+    --yellow: #{$yellow-light};
   }
 }
 
@@ -53,6 +56,7 @@ $grey1: var(--grey1);
 $white: var(--white);
 $red: var(--red);
 $whitebg: var(--background);
+$yellow: var(--yellow);
 $border: var(--border);
 // margin
 

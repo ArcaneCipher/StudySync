@@ -1,5 +1,7 @@
 import BackgroundStudy from '../components/BackgroundStudy';
 import ForegroundStudy from '../components/ForegroundStudy';
+import StudySession from "./StudySession";
+
 
 const Study = () => {
   return (

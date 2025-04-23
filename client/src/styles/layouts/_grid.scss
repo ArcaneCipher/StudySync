@@ -6,9 +6,9 @@ $max-width: 1200px;       // Optional max-width
   display: flex;          // Enable flexbox
   flex-wrap: wrap;        // Allow items to wrap
   gap: $grid-gap;         // Use gap for spacing (modern flexbox)
-  width: 100%;
-  margin: 0 auto;         // Center the grid
-  // max-width: $max-width;// Optional max width
+  width: 100%; 
+  margin-left: auto; 
+  margin-right: auto;       // Center the grid
 }
 
 .grid-col {

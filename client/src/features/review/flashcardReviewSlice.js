@@ -30,14 +30,16 @@ export const submitFlashcardReview = createAsyncThunk(
   }
 );
 
+const initialState ={
+  reviewQueue: [],
+  status: 'idle',
+  error: null,
+  submitting: false,
+}
+
 const flashcardReviewSlice = createSlice({
   name: 'review',
-  initialState: {
-    queue: [],
-    status: 'idle',
-    error: null,
-    submitting: false,
-  },
+  initialState,
   reducers: {},
   extraReducers: (builder) => {
     builder
@@ -46,7 +48,7 @@ const flashcardReviewSlice = createSlice({
       })
       .addCase(fetchReviewQueue.fulfilled, (state, action) => {
         state.status = 'succeeded';
-        state.queue = action.payload;
+        state.reviewQueue = action.payload;
       })
       .addCase(fetchReviewQueue.rejected, (state, action) => {
         state.status = 'failed';

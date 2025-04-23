@@ -6,7 +6,6 @@ import Button from './Button';
 import Textarea from './Textarea';
 import useIsMobile from '../hooks/useIsMobile';
 import { submitFlashcardReview } from '../features/review/flashcardReviewSlice';
-import { login } from "../features/user/userSlice";
 
 const FlashcardStudy = ({ 
   flashcard_id,
@@ -22,12 +21,7 @@ const FlashcardStudy = ({
   const isMobile = useIsMobile(1200);
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [selectedRating, setSelectedRating] = useState(null);
-
-  useEffect(() => {
-    dispatch(login({ id: 1, name: "Alice", email: "alice@example.com" }));
-  }, [dispatch]);
-
-  const user_id = useSelector((state) => state.user.user?.id);
+  const user_id = 1;
 
   const handleRatingClick = async (level) => {
     if (!user_id || !flashcard_id) return;
@@ -59,7 +53,7 @@ const FlashcardStudy = ({
 
   const calculateNextDue = (difficulty) => {
     const today = new Date();
-    const daysToAdd = difficulty === 'easy' ? 4 : difficulty === 'medium' ? 2 : 1;
+    const daysToAdd = difficulty === 'easy' ? 3 : difficulty === 'medium' ? 2 : 1;
     today.setDate(today.getDate() + daysToAdd);
     return today.toISOString().split('T')[0];
   };

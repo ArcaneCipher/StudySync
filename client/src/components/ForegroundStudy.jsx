@@ -7,8 +7,6 @@ import { ArrowLeft } from 'lucide-react';
 import FlashcardStudy from '../components/FlashcardStudy';
 import { motion } from "framer-motion";
 
-// import ReviewQueue from '../components/ReviewQueue';
-
 
 const ForegroundStudy = () => {
 
@@ -93,7 +91,6 @@ const ForegroundStudy = () => {
         />
       )}
 
-      {/* <ReviewQueue /> */}
     </div>
   );
 };

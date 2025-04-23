@@ -38,7 +38,6 @@ const Flashcards = ({ deckId }) => {
   // Fetch flashcards when deckId changes or component mounts
   useEffect(() => {
     if (deckId) {
-      console.log('Fetching flashcards for deck:', deckId);
       dispatch(fetchFlashcards(deckId));
     }
   }, [deckId, dispatch]);

@@ -8,8 +8,8 @@ const DashboardReviewSection = () => {
   const reviewQueue = useSelector((state) => state.review.reviewQueue);
   const isLoading = useSelector((state) => state.review.loading);
   const error = useSelector((state) => state.review.error);
-  const user_id = 1;
-
+  const user_id = useSelector((state) => state.auth.user?.id);
+  
   useEffect(() => {
     if (user_id) {
       dispatch(fetchReviewQueue(user_id));

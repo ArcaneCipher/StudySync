@@ -21,7 +21,7 @@ const FlashcardStudy = ({
   const isMobile = useIsMobile(1200);
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [selectedRating, setSelectedRating] = useState(null);
-  const user_id = 1;
+  const user_id = useSelector((state) => state.auth.user?.id);
 
   const handleRatingClick = async (level) => {
     if (!user_id || !flashcard_id) return;
@@ -53,7 +53,7 @@ const FlashcardStudy = ({
 
   const calculateNextDue = (difficulty) => {
     const today = new Date();
-    const daysToAdd = difficulty === 'easy' ? 3 : difficulty === 'medium' ? 2 : 1;
+    const daysToAdd = difficulty === 'easy' ? 4 : difficulty === 'medium' ? 2 : 1;
     today.setDate(today.getDate() + daysToAdd);
     return today.toISOString().split('T')[0];
   };

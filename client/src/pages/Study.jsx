@@ -1,6 +1,6 @@
 import BackgroundStudy from '../components/BackgroundStudy';
 import ForegroundStudy from '../components/ForegroundStudy';
-import StudySession from "./StudySession";
+import StudySession from "../components/StudySession";
 
 
 const Study = () => {

@@ -5,6 +5,7 @@ import authReducer from "./features/auth/authSlice";
 import decksSlice from "./features/decks/decksSlice";
 import flashcardsSlice from "./features/flashcards/flashcardsSlice";
 import flashcardReviewReducer from './features/review/flashcardReviewSlice';
+import studySessionReducer from './features/studySessions/studySessionSlice';
 
 const store = configureStore({
   reducer: {
@@ -13,7 +14,8 @@ const store = configureStore({
     auth: authReducer,
     decks: decksSlice,
     flashcards: flashcardsSlice,
-    review: flashcardReviewReducer
+    review: flashcardReviewReducer,
+    studySession: studySessionReducer,
   },
 });
 

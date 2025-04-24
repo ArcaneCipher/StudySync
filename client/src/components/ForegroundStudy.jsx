@@ -1,6 +1,7 @@
 import { useEffect, useRef, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useParams } from 'react-router-dom';
+import StudySession from '../components/StudySession';
 import { fetchFlashcards } from '../features/flashcards/flashcardsSlice';
 import { Link } from "react-router-dom";
 import { ArrowLeft } from 'lucide-react';
@@ -57,6 +58,7 @@ const ForegroundStudy = () => {
   return (
     <div className='foreground-study'>
       <Link className='flex align-items-center gap10 mb1' to="/decks"><ArrowLeft /> Decks</Link>
+      <StudySession deckId={deckId} />
       { isLoading ?  (
         <p className='no-flashcards'> </p>
       ) : (

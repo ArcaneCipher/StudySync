@@ -6,6 +6,7 @@ const initialState = {
   endTime: null,
   durationMin: 0,
   notes: "",
+  sessionHistory: [],
 };
 
 const studySessionSlice = createSlice({
@@ -27,9 +28,31 @@ const studySessionSlice = createSlice({
     addNotes: (state, action) => {
       state.notes = action.payload;
     },
-    resetSession: () => initialState
+    resetSession: (state) => {
+      const history = state.sessionHistory;
+      return {
+        ...initialState,
+        sessionHistory: history
+      };
+    },
+    //Log sessions
+    logSession: (state) => {
+      const { deckId, startTime, endTime, durationMin, notes } = state;
+      if (!startTime || !endTime || durationMin <= 0) return;
+
+      const newLog = {
+        deckId,
+        startTime, 
+        endTime, 
+        durationMin, 
+        notes,
+      };
+
+      state.sessionHistory.push(newLog);
+    }
   }
 });
 
-export const { startSession, endSession, addNotes, resetSession } = studySessionSlice.actions;
+
+export const { startSession, endSession, addNotes, resetSession, logSession } = studySessionSlice.actions;
 export default studySessionSlice.reducer;

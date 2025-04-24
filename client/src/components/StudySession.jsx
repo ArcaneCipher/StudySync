@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useParams } from 'react-router-dom';
-import { startSession, endSession, addNotes, resetSession } from '../features/studySessions/studySessionSlice';
+import { startSession, endSession, addNotes, resetSession, logSession } from '../features/studySessions/studySessionSlice';
 import { updateFlashcard } from '../features/flashcards/flashcardsSlice';
 
 const StudySession = () => {
@@ -36,6 +36,7 @@ useEffect(() => {
     const end = Date.now();
     const duration = Math.floor((end - startTimestamp) / 60000)
     dispatch(endSession({ endTime: end, duration }));
+    dispatch(logSession());
     setStartTimestamp(null);
 
     //resetting session after 2 minutes so user can see time of study after 2 minutes
@@ -70,6 +71,20 @@ useEffect(() => {
             <p>Session lasted {session.durationMin} minute{session.durationMin !== 1 ? 's' : ''}</p>
           )}
         </>
+      )}
+    
+    {/*Display session history for verification */}
+    {session.sessionHistory.length > 0 && (
+        <div>
+          <h3>Session History:</h3>
+          <ul>
+            {session.sessionHistory.map((sesh, index) => (
+              <li key={index}>
+                Deck: {sesh.deckId || 'N/A'} | Duration: {sesh.durationMin} min | Notes: {sesh.notes || 'None'}
+              </li>
+            ))}
+          </ul>
+        </div>
       )}
     </div>
   );

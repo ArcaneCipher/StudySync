@@ -2,6 +2,7 @@ import { createSlice } from "@reduxjs/toolkit";
 
 const initialState = {
   deckId: null,
+  goalId: null, // goalId field added to track the goal associated with the session
   startTime: null,
   endTime: null,
   durationMin: 0,
@@ -14,7 +15,10 @@ const studySessionSlice = createSlice({
   initialState,
   reducers: {
     startSession: (state, action) => {
+      console.log("Starting session for goalId:", action.payload.goalId);
+
       state.deckId = action.payload.deckId;
+      state.goalId = action.payload.goalId; // Payload for tracking goalId and any Goal-Session data
       state.startTime = Date.now();
       state.endTime = null;
       state.durationMin = 0;
@@ -37,7 +41,7 @@ const studySessionSlice = createSlice({
     },
     //Log sessions
     logSession: (state) => {
-      const { deckId, startTime, endTime, durationMin, notes } = state;
+      const { deckId, startTime, endTime, durationMin, notes, goalId } = state;
       if (!startTime || !endTime || durationMin <= 0) return;
 
       const newLog = {
@@ -46,6 +50,7 @@ const studySessionSlice = createSlice({
         endTime, 
         durationMin, 
         notes,
+        goalId, // Include goalId in the log
       };
 
       state.sessionHistory.push(newLog);

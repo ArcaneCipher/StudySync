@@ -32,9 +32,7 @@ useEffect(() => {
   console.log("Session history:", sessionHistory);
 }, [sessionHistory]);
 
-  const goalId = useSelector(state => state.studySession.goal); // Fetch the goalId from the state
-  console.log(goalId);
-
+  const goalId = useSelector(state => state.studySession.goalId); // Fetch the goalId from the state
 
   // Load all goals when the component renders
   useEffect(() => {

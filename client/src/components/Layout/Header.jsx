@@ -2,7 +2,7 @@
 // import { login, logout } from "../../features/auth/authSlice";
 import { useLocation } from 'react-router-dom';
 import { useEffect, useState } from 'react';
-import { Menu } from 'lucide-react';
+import { Menu, X } from 'lucide-react';
 
 const routeTitles = {
   '/': 'Dashboard',
@@ -31,7 +31,7 @@ const getFormattedDateParts = () => {
 };
 
 
-const Header = () => {
+const Header = ({ isCollapse, toggleCollapse }) => {
   
   //const dispatch = useDispatch();
   //const { user, isAuthenticated } = useSelector((state) => state.user);
@@ -47,7 +47,7 @@ const Header = () => {
   //  };
 
   const [title, setTitle] = useState('');
-  const [isCollapse, setIsCollapse] = useState(true);
+  // const [isCollapse, setIsCollapse] = useState(true);
   const { day, date } = getFormattedDateParts();
 
   useEffect(() => {
@@ -59,9 +59,9 @@ const Header = () => {
     }
   }, [location]);
 
-  const toggleCollapse = () => {
-    setIsCollapse(!isCollapse)
-  }
+  // const toggleCollapse = () => {
+  //   setIsCollapse(!isCollapse)
+  // }
 
   useEffect(() => {
     if (isCollapse) {
@@ -76,7 +76,8 @@ const Header = () => {
     <header>
       <h3>{title}</h3>
       <p><b>{day}</b>, {date}</p>      
-      <Menu className='menu-collapse' onClick={toggleCollapse} />
+      
+      {isCollapse ? <Menu className='menu-collapse' onClick={toggleCollapse} /> : <X className='menu-collapse' onClick={toggleCollapse} />}
     </header>
   );
 };

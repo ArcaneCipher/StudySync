@@ -39,6 +39,10 @@ const FlashcardStudy = ({
       next_due,
     };
 
+
+  console.log('Submitting review:', reviewData);
+
+  
     setIsSubmitting(true);
     await dispatch(submitFlashcardReview(reviewData));
     setIsSubmitting(false);

@@ -3,7 +3,7 @@ import useGoals from "../hooks/useGoals";
 import GoalForm from "./GoalForm";
 import Button from "./Button";
 import AnimatedCard from "./AnimatedCard";
-import { CirclePlus } from "lucide-react";
+import { CirclePlus, CircleX, SquarePen, Trash2} from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion"; // Import motion and AnimatePresence for animations
 import { calculateGoalTime } from "../utils/calculateGoalTime"; // Utility function to calculate goal time
 import { useSelector, useDispatch } from "react-redux"; // Import useSelector to access Redux store
@@ -119,16 +119,20 @@ useEffect(() => {
               : 0;// Converts traget_hours to minutes then multiply by 100 to get percentage, caps at 100%
             return (
             <li key={goal.id} className="goal-card">
+             <div>
               <h3>{goal.title}</h3>
               <p>{goal.description}</p>
-              <span>Finish by: {goal.target_hours} minutes</span>
+             </div>
+              <span className="finish-by">Finish by: <b>{goal.target_hours} minutes</b></span>
               <div className="progress-bar">
-                <progress value={progress} max="100"></progress>
-                <p>{Math.round(progress)}% Progress</p>
+                <progress className={`${progress > 50 ? '' : 'less-half'}`} value={progress} max="100"></progress>
+                <p>{Math.round(progress)}%</p>
               </div>
+              {/* Extra delete icon for non-mobile usage */}
+              <CircleX onClick={() => removeGoal(goal.id)} />
               <div className="edit-overlay">
-                <Button variant="primary" onClick={() => handleEditClick(goal)}>Edit</Button>
-                <Button variant="danger" onClick={() => removeGoal(goal.id)}>Delete</Button>
+                <SquarePen onClick={() => handleEditClick(goal)} />  
+                <Trash2 onClick={() => removeGoal(goal.id)} />     
               </div>
             </li>
             )

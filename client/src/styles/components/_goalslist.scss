@@ -2,11 +2,10 @@
 
 .goal-wrapper {
   display: flex;
-  align-items: flex-start;
   padding: 2rem 0;
-  overflow: auto;
+  margin: 0;
   flex-wrap: wrap;
-  gap: 2rem;
+  gap: 1rem;
 
   &:not(:last-child) {
     border-bottom: 1px solid $grey;
@@ -27,45 +26,60 @@
   }
 
   .goal-card {
-    background: linear-gradient(to bottom, hsl(220deg 20% 60% / 70%), hsl(200deg 15% 25% / 30%));
+    background: var(--purple1);
     border-radius: 1rem;
     padding: 1.5rem;
-    width: 100%;
-    height: auto;
-    margin-right: 2rem;
-    color: #ffffff;
+    margin-right: 0;
     transition: all 0.3s linear;
     position: relative;
     cursor: pointer;
     display: flex;
     flex-direction: column;
-    justify-content: end;
+    justify-content: space-between;
+    max-width: 250px;
+    padding-bottom: 3.5rem;
 
     h3 {
+      margin-top: 0;
       margin-bottom: 1rem;
     }
 
     p {
       word-wrap: break-word;
       margin-top: 0;
-      margin-bottom: 1rem;
+      margin-bottom: 1.5rem;
       transition: all 0.3s linear;
     }
-
+    .progress-bar {
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      background: #8376be;
+      border-radius: 0 0 1rem 1rem;
+      display: flex;
+      padding: 0.5rem 1.5rem;
+      color: #fff;
+      align-items: center;
+      justify-content: space-between;     
+      gap: 1rem;
+      p {
+        margin-bottom: 0;
+      }
+    }
+    span.finish-by {
+      font-size: 12px;
+    }
     &:hover,
     &:focus,
     &:focus-within,
     &:focus-visible {
       transform: translateY(-10px) scale(1.02);
       box-shadow: 0 8px 12px rgba(0, 0, 0, 0.1);
-
+      color: rgba(0, 0, 0, 0.1);
       .lucide-circle-x,
       .edit-overlay {
         opacity: 1;
-      }
-
-      button {
-        margin-bottom: 2.5rem;
       }
     }
 
@@ -75,73 +89,118 @@
   }
 
   .edit-overlay {
-    // background: #6e669166;
-    position: static;
+    background: #6e669166;
+    position: absolute;
     bottom: 0;
-    right: 0;
-    width: auto;
-    height: auto;
+    right: 0;    
+    width: 100%;
+    height: 100%;
     border-radius: 1rem;
     display: flex;
     align-items: end;
-    padding: 1rem;
+    gap: 1rem;
+    padding: 1.5rem;
     transition: all 0.3s ease-in;
     opacity: 0;
+    padding-bottom: 3.5rem;
+    svg {
+      stroke: #000000;
+    }
   }
-
+  .lucide-trash-2 {
+    display: none;
+  }
   .lucide-circle-x {
     position: absolute;
     top: -8px;
     right: -8px;
     opacity: 0;
     background-color: $primary;
-    color: $white;
+    color: $whitebg;
     transition: all 0.3s ease-in;
     border-radius: 100%;
     z-index: 9;
   }
-
-  .lucide-trash-2 {
-    display: none;
-  }
 }
-
-// Responsive tweaks
-@media(max-width: 1600px) {
-  .goal-wrapper {
-    .goal-card {
-      margin-right: 20px;
+progress {
+  height: 5px;
+  appearance: none; 
+  &::-webkit-progress-bar {
+    background-color: #eee;
+    border-radius: 10px;
+  }
+  &::-webkit-progress-value {
+    background-color: #3eca6d;
+    border-radius: 10px;
+  }
+  &::-moz-progress-bar {
+    background-color: #3eca6d;
+    border-radius: 10px;
+  }
+  &.less-half {
+    &::-webkit-progress-value {
+      background-color: #FFC107;
+    }
+    &::-moz-progress-bar {
+      background-color: #FFC107;
     }
   }
 }
 
+// Responsive tweaks
+
+@media (max-width: 1500px){
+  .goal-wrapper {
+    .goal-card {
+      max-width: 283px;
+    }
+  }
+}
+@media (max-width: 1366px){
+  .goal-wrapper {
+    .goal-card {
+      max-width: 264px;
+    }
+  }
+}
+@media (max-width: 1280px){
+  .goal-wrapper {
+    .goal-card {
+      max-width: 243px;
+    }
+  }
+}
+@media (max-width: 1199px){
+  .goal-wrapper {
+    .goal-card {
+      max-width: 234px;
+    }
+  }
+}
+@media (max-width: 991px){
+  .goal-wrapper {
+    .goal-card {
+      max-width: 232px;
+    }
+  }
+}
 @media(max-width: 767px) {
   .goal-wrapper {
     padding: 0;
-    border: 1px solid #e4e4e4;
-    border-radius: 1rem;
-    margin-bottom: 1rem;
-    overflow: visible;
-    flex-direction: column;
-
     .goal-card {
-      margin: 0;
-      width: 100%;
-      height: auto;
-      border-radius: 1rem 1rem 0 0;
       padding: 1.25rem;
-
+      padding-bottom: 3.5rem;
+      max-width: 100%;
+      width: 100%;
       button {
         width: 80px;
       }
-
       &:hover,
       &:focus,
       &:focus-within,
       &:focus-visible {
         transform: none;
         box-shadow: none;
-
         button {
           margin-bottom: 0;
         }
@@ -171,12 +230,11 @@
       gap: 0.5rem;
       width: auto;
       height: auto;
+      margin-top: -22px;
     }
-
     .lucide-trash-2 {
       display: inline-block;
     }
-
     .lucide-circle-x {
       display: none;
     }

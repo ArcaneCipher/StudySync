@@ -24,7 +24,7 @@ body {
   background-color: $whitebg;
 }
 *::-webkit-scrollbar {
-  width: 2px;
+  width: 0px;
 }
 *::-webkit-scrollbar-track {
   border-radius: 0;
@@ -111,5 +111,10 @@ a {
   body {
     padding-left: 0; 
   }
-  
+}
+@media(max-width:767px) {
+  h1 {
+    font-size: 2em;
+    line-height: 1.1;
+  }
 }

@@ -10,6 +10,7 @@ import { motion } from "framer-motion";
 
 
 const ForegroundStudy = () => {
+  const session = useSelector((state) => state.studySession);
 
   const [flippedCards, setFlippedCards] = useState({});
   const handleFlip = (id) => {
@@ -54,44 +55,52 @@ const ForegroundStudy = () => {
     }
   }, [deckId, dispatch]);
   
+  const isSessionActive = session.startTime && !session.endTime;
 
   return (
     <div className='foreground-study'>
-      <Link className='flex align-items-center gap10 mb1' to="/decks"><ArrowLeft /> Decks</Link>
+      { session.endTime && <Link className='flex align-items-center gap10 mb1' to="/decks"><ArrowLeft /> Decks</Link>}
       <StudySession deckId={deckId} />
-      { isLoading ?  (
-        <p className='no-flashcards'> </p>
-      ) : (
-        flashcards.length > 0 ? (
-          <div className='flashcards-study' ref={ref}> 
-            {flashcards.map(card => (
-              <FlashcardStudy key={card.id}    
-                reference={ref}    
-                flashcard_id={card.id}         
-                front_text={card.front_text}
-                back_text={card.back_text}
-                isFlip={!!flippedCards[card.id]}
-                isExpand={expandedCardId === card.id}
-                onClick={() => handleFlip(card.id)}
-                onExpand={() => handleExpand(card.id)}
-              />
-            ))}
-          </div>
-        ) : (
-          <p className='no-flashcards'>No flashcards found for this deck.</p>
-        )
-      )} 
+      {/* Conditionally render flashcards once the session has started */}
+      {isSessionActive && (
+        <div>
+          { isLoading ?  (
+            <p className='no-flashcards'> </p>
+          ) : (
+            flashcards.length > 0 ? (
+              <div className='flashcards-study' ref={ref}> 
+                {flashcards.map(card => (
+                  <FlashcardStudy key={card.id}    
+                    reference={ref}    
+                    flashcard_id={card.id}         
+                    front_text={card.front_text}
+                    back_text={card.back_text}
+                    isFlip={!!flippedCards[card.id]}
+                    isExpand={expandedCardId === card.id}
+                    onClick={() => handleFlip(card.id)}
+                    onExpand={() => handleExpand(card.id)}
+                  />
+                ))}
+              </div>
+            ) : (
+              <p className='no-flashcards'>No flashcards found for this deck.</p>
+            )
+          )} 
 
-      {expandedCardId && (
-        <motion.div 
-          className="backdrop" 
-          initial={{ opacity: 0 }} 
-          animate={{ opacity: 1 }} 
-          exit={{ opacity: 0 }} 
-          transition={{ duration: 0.3 }}
-          onClick={() => setExpandedCardId(null)} // Optional: click backdrop to close
-        />
+          {expandedCardId && (
+            <motion.div 
+              className="backdrop" 
+              initial={{ opacity: 0 }} 
+              animate={{ opacity: 1 }} 
+              exit={{ opacity: 0 }} 
+              transition={{ duration: 0.3 }}
+              onClick={() => setExpandedCardId(null)} // Optional: click backdrop to close
+            />
+          )}
+        </div>
       )}
+
+
 
     </div>
   );

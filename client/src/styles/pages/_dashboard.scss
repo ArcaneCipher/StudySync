@@ -30,5 +30,36 @@
     &.yellow {
       background-color: $yellow;
     }
+    &.peach {
+      background-color: $peach;
+    }
+  }
+}
+.history-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  grid-template-rows: auto auto;
+  gap: 20px;
+  .row-span-2 {
+    grid-row: span 2;
+  }
+}
+
+@media(max-width:767px) {
+  .welcome-user {    
+    padding: 1.5rem 5rem 1.5rem 1.5rem;
+    .work {
+      bottom: -10px;
+      right: -16px;
+      width: 170px;
+      top: auto;
+    }
+  }
+  .grid-container {
+    display: block;
+    > * {
+      display: block;
+      max-width: 100%;
+    }
   }
 }

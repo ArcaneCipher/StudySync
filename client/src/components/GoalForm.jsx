@@ -1,5 +1,4 @@
 import { useState, useEffect } from "react";
-import { CircleX } from "lucide-react";
 import Button from './Button';
 import Input from './Input';
 import Textarea from './Textarea';
@@ -41,9 +40,9 @@ const GoalForm = ({ goal, onSave, onCancel }) => {
   };
 
   return (
-    <div className="goal-form">
+    <div className={`goal-form ${goal ? 'edit-form' : 'add-form'}`}>
       <form onSubmit={handleSubmit}>
-      <h3>{goal ? "Edit Goal" : "Add New Goal"}</h3>
+      <h2>{goal ? "Edit Goal" : "Add New Goal"}</h2>
       
 
       <Input 

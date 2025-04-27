@@ -26,7 +26,7 @@ const demoUsers = [
   },
 ];
 
-const DevUserSwitcher = () => {
+const DevUserSwitcher = ({toggleCollapse}) => {
   const dispatch = useDispatch();
   const { user } = useSelector((state) => state.auth);
 
@@ -35,7 +35,7 @@ const DevUserSwitcher = () => {
 
   const handleSwitch = async ({ email, password }) => {
     dispatch(loginStart());
-
+    toggleCollapse();
     try {
       const res = await api.post("/api/v1/login", { email, password });
       dispatch(loginSuccess(res.data.user)); // match your backend structure

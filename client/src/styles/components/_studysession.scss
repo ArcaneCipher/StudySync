@@ -1,0 +1,83 @@
+.start-session {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  left: 0;
+  top: 0;
+  background: var(--purple1);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+}
+.study-session {
+  .btn-add-notes {
+    position: absolute;  
+    right: 20px;
+    top: 20px;
+    margin: 0;
+    z-index: 9;
+  }
+  .running-session {
+    position: absolute;
+    right: 180px;
+    top: 2rem;
+    margin: 0;
+    font-size: 14px;
+  }
+  .session-lasted{
+    position: absolute;
+    right: 20px;
+    top: 20px;
+    margin: 0;
+    font-size: 14px;
+  }
+  .btn-end-session{
+    position: absolute;  
+    right: 20px;
+    bottom: 20px;
+    margin: 0;
+    z-index: 12;
+  }
+  .notes-modal {
+    position: fixed;
+    max-width: 500px;
+    width: 90%;
+    left: 0;
+    right: 0;
+    top: 50%;
+    transform: translateY(-50%);
+    z-index: 14;
+    background: #fff;
+    padding: 20px;
+    border-radius: 1rem;
+    margin: 0 auto;
+    .lucide-circle-x {
+      position: absolute;
+      right: -10px;
+      top: -10px;
+      background: #fff;
+      border-radius: 50%;
+      cursor: pointer;
+    }
+  }
+}
+
+@media(max-width:767px ){
+  .study-session {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 20px;
+    flex-wrap: wrap;
+    .running-session,.btn-add-notes {
+      position: relative;
+      right: auto;
+      left: auto;
+      top: auto;
+    }
+    .btn-end-session {
+      position: fixed;
+    }
+  }
+}

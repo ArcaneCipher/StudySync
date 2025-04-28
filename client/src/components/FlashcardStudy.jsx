@@ -46,7 +46,7 @@ const FlashcardStudy = ({
     setIsSubmitting(true);
     await dispatch(submitFlashcardReview(reviewData));
     setIsSubmitting(false);
-    // onExpand(); // flip back or move to next card
+    onExpand(); // flip back or move to next card
   };
 
   useEffect(() => {

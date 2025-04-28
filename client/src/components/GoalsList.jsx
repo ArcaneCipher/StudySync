@@ -156,7 +156,7 @@ const GoalsList = () => {
                 <div className="edit-overlay">
                   <Button
                     variant="primary"
-                    onClick={() => navigate(`/study/goal/${goal.id}`)}
+                    onClick={() =>  navigate(`/study/goal/${goal.id}?from=goals`)}
                   >
                     Study Goal
                   </Button>

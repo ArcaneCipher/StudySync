@@ -63,3 +63,10 @@
     }
   }
 }
+
+
+@media (prefers-color-scheme: dark) {
+  .welcome-user {
+    background: $card;
+  }
+}

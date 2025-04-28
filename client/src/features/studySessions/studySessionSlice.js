@@ -1,15 +1,8 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
-import { createStudySession } from "../../api/studySessionsApi"; // use your API helper
-
-const initialState = {
-  deckId: null,
-  goalId: null, // goalId field added to track the goal associated with the session
-  startTime: null,
-  endTime: null,
-  durationMin: 0,
-  notes: "",
-  sessionHistory: [],
-};
+import {
+  createStudySession,
+  getStudySessions,
+} from "../../api/studySessionsApi"; // use your API helper
 
 // THUNK: submits a finished session to the server
 export const submitStudySession = createAsyncThunk(
@@ -23,6 +16,29 @@ export const submitStudySession = createAsyncThunk(
     }
   }
 );
+
+export const fetchStudySessions = createAsyncThunk(
+  "studySession/fetchAll",
+  async (_, { rejectWithValue }) => {
+    try {
+      const response = await getStudySessions();
+      return response;
+    } catch (error) {
+      return rejectWithValue(error.response?.data || error.message);
+    }
+  }
+);
+
+const initialState = {
+  deckId: null,
+  goalId: null, // goalId field added to track the goal associated with the session
+  startTime: null,
+  endTime: null,
+  durationMin: 0,
+  notes: "",
+  sessionHistory: [],
+  fetchedSessions: [],
+};
 
 const studySessionSlice = createSlice({
   name: "studySession",
@@ -72,14 +88,20 @@ const studySessionSlice = createSlice({
   },
   extraReducers: (builder) => {
     builder
-      .addCase(submitStudySession.pending, (state) => {
-        // you can add loading flag later if you want
-      })
+      .addCase(submitStudySession.pending, (state) => {})
       .addCase(submitStudySession.fulfilled, (state, action) => {
         console.log("Study session saved successfully:", action.payload);
       })
       .addCase(submitStudySession.rejected, (state, action) => {
         console.error("Failed to save study session:", action.payload);
+      })
+      // NEW
+      .addCase(fetchStudySessions.fulfilled, (state, action) => {
+        console.log("Fetched sessions:", action.payload);
+        state.fetchedSessions = action.payload; // replace fetched sessions
+      })
+      .addCase(fetchStudySessions.rejected, (state, action) => {
+        console.error("Failed to fetch study sessions:", action.payload);
       });
   },
 });

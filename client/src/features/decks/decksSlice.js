@@ -1,7 +1,8 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import axios from "axios";
 
-// updated to accept optional userId
+// Async thunks
+
 export const fetchDecks = createAsyncThunk(
   "decks/fetchDecks",
   async (userId = null) => {
@@ -35,13 +36,14 @@ export const deleteDeck = createAsyncThunk("decks/deleteDeck", async (id) => {
   return id;
 });
 
-// initial state of the decks slice
+// Initial state
 const initialState = {
-  decks: [], // list of decks
+  decks: [],
   status: "idle",
   error: null,
 };
 
+// Slice
 const decksSlice = createSlice({
   name: "decks",
   initialState,
@@ -68,7 +70,9 @@ const decksSlice = createSlice({
       .addCase(updateDeck.fulfilled, (state, action) => {
         const updated = action.payload;
         const index = state.decks.findIndex((deck) => deck.id === updated.id);
-        if (index !== -1) state.decks[index] = updated;
+        if (index !== -1) {
+          state.decks[index] = updated;
+        }
       })
       // Delete
       .addCase(deleteDeck.fulfilled, (state, action) => {
@@ -77,4 +81,5 @@ const decksSlice = createSlice({
   },
 });
 
+// Exports
 export default decksSlice.reducer;

@@ -113,7 +113,8 @@ ActiveRecord::Schema[7.1].define(version: 2025_04_28_052243) do
     t.boolean "is_public"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.integer "deck_id"
+    t.bigint "deck_id", null: false
+    t.index ["deck_id"], name: "index_goals_on_deck_id"
     t.index ["user_id"], name: "index_goals_on_user_id"
   end
 

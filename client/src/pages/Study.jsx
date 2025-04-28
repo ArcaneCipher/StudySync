@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
+import { useParams, useSearchParams } from "react-router-dom";
 import BackgroundStudy from "../components/BackgroundStudy";
 import ForegroundStudy from "../components/ForegroundStudy";
 import StudySession from "../components/StudySession";
@@ -8,7 +8,10 @@ import axios from "../api/axios";
 const Study = () => {
   const { deckId, goalId } = useParams();
   const [resolvedDeckId, setResolvedDeckId] = useState(null);
+  const [searchParams] = useSearchParams();
+  const from = searchParams.get('from');
 
+  console.log('FROM:', from); // check here
   useEffect(() => {
     const resolveDeckId = async () => {
       if (goalId) {
@@ -38,7 +41,7 @@ const Study = () => {
   return (
     <div className="study-page">
       <BackgroundStudy deckId={resolvedDeckId} goalId={goalId} />
-      <ForegroundStudy deckId={resolvedDeckId} goalId={goalId} />
+      <ForegroundStudy deckId={resolvedDeckId} goalId={goalId} from={from}/>
       {resolvedDeckId && (
         <StudySession deckId={resolvedDeckId} goalId={goalId} />
       )}

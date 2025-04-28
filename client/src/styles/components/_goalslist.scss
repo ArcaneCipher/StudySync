@@ -55,11 +55,11 @@
       bottom: 0;
       left: 0;
       right: 0;
-      background: #8376be;
+      background: $purple;
       border-radius: 0 0 1rem 1rem;
       display: flex;
       padding: 0.5rem 1.5rem;
-      color: #fff;
+      color: $white;
       align-items: center;
       justify-content: space-between;     
       gap: 1rem;
@@ -97,14 +97,17 @@
     height: 100%;
     border-radius: 1rem;
     display: flex;
-    align-items: end;
+    align-items: center;
     gap: 1rem;
     padding: 1.5rem;
     transition: all 0.3s ease-in;
     opacity: 0;
     padding-bottom: 3.5rem;
     svg {
-      stroke: #000000;
+      stroke: #000000;   
+      position: absolute;
+      bottom: 60px;
+      left: 20px;
     }
   }
   .lucide-trash-2 {
@@ -238,5 +241,34 @@ progress {
     .lucide-circle-x {
       display: none;
     }
+  }
+}
+
+
+
+@media (prefers-color-scheme: dark) {
+  .goal-wrapper {
+    .goal-card {
+      background: $grey;
+      border: 1px solid $grey1;
+      &:hover {
+        color: rgb(255 255 255 / 10%);
+        .edit-overlay {
+          background: transparent;
+          svg {
+            stroke: #ffffff;
+          }
+        }
+      }
+      .edit-overlay {
+        background: transparent;
+        svg {
+          stroke: #ffffff;
+        }
+      }
+    }
+  }
+  .goal-wrapper .goal-card .progress-bar {
+    background: $grey1;
   }
 }

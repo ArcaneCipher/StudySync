@@ -43,8 +43,8 @@ $peach-light : #f3e0e5;
     --background: #2C2C2C;
     --card: #4e4e4e;
     --border: #4e4e4e;
-    --yellow: #{$yellow-light};
-    --peach: #{$peach-light};
+    --yellow: #4e4e4e;
+    --peach:  #4e4e4e;
   }
 }
 
@@ -61,6 +61,7 @@ $whitebg: var(--background);
 $yellow: var(--yellow);
 $peach: var(--peach);
 $border: var(--border);
+$card: var(--card);
 // margin
 
 $mt0:0;

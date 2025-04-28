@@ -1,5 +1,5 @@
 import React from "react";
-import { Link } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import Flashcards from "./Flashcard";
 import Button from "./Button";
 import Input from "./Input";
@@ -23,6 +23,7 @@ const DeckCard = ({
 }) => {
   const isEditing = editingDeckId === deck.id; // check if this deck is being edited
 
+  const navigate = useNavigate();
   const isMobile = useIsMobile(768);
   return (
     <>
@@ -34,8 +35,14 @@ const DeckCard = ({
 
           {/* Mobile-only button row for Study and Edit/Delete */}
           <div className="mobile-btn-row">
-            <Button variant={`${isMobile ? "secondary-reverse" : "primary"}`}>
+            {/* <Button variant={`${isMobile ? "secondary-reverse" : "primary"}`}>
               <Link to={`/study/${deck.id}`}>Study</Link>
+            </Button> */}
+
+            <Button variant={`${isMobile ? "secondary-reverse" : "primary"}`} 
+            onClick={() =>  navigate(`/study/deck/${deck.id}?from=decks`)}
+            >
+              Study Deck
             </Button>
 
             <div className="edit-overlay">

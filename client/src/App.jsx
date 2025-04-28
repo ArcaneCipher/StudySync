@@ -12,7 +12,7 @@ function App() {
       <Layout>
         <Routes location={location} key={location.pathname}>
           <Route path="/" element={<Dashboard />} />
-          <Route path="/study/:deckId" element={<Study />} />
+          <Route path="/study/deck/:deckId" element={<Study />} />
           <Route path="/study/goal/:goalId" element={<Study />} />
           <Route path="/decks" element={<Decks />} />
           <Route path="/goals" element={<GoalsList />} />

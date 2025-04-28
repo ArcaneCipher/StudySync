@@ -59,7 +59,7 @@ module Api
 
       # Strong parameters for goal creation/updating
       def goal_params
-        params.require(:goal).permit(:user_id, :title, :description, :target_hours, :is_public)
+        params.require(:goal).permit(:user_id, :title, :description, :target_hours, :is_public, :deck_id)
       end
     end
   end

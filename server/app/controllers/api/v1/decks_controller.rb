@@ -12,10 +12,10 @@ class Api::V1::DecksController < ApplicationController
   # Returns all decks or filters by user_id if provided
   def index
     @decks = if params[:user_id]
-      # Logged in user
-      Deck.where("user_id = ? OR is_public = ?", params[:user_id], true)
+      # Logged in user: only show THEIR decks (public or private)
+      Deck.where(user_id: params[:user_id])
     else
-      # Not logged in
+      # Not logged in: only show public decks
       Deck.where(is_public: true)
     end
 

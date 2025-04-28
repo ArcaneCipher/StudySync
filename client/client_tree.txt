@@ -11,27 +11,34 @@ client
 │   ├── App.jsx
 │   ├── api
 │   │   ├── axios.js
-│   │   └── goalsApi.js
+│   │   ├── goalsApi.js
+│   │   └── studySessionsApi.js
 │   ├── assets
+│   │   ├── flashcards.png
 │   │   ├── logo.png
 │   │   └── work.png
 │   ├── components
 │   │   ├── AnimatedCard.jsx
+│   │   ├── Auth.jsx
 │   │   ├── BackgroundStudy.jsx
 │   │   ├── Button.jsx
 │   │   ├── DeckCard.jsx
 │   │   ├── Flashcard.jsx
 │   │   ├── FlashcardStudy.jsx
+│   │   ├── FlashcardStudyBackup.jsx
 │   │   ├── ForegroundStudy.jsx
+│   │   ├── GoalForm.jsx
+│   │   ├── GoalsList.jsx
 │   │   ├── Input.jsx
 │   │   ├── Layout
 │   │   │   ├── Footer.jsx
-│   │   │   ├── GoalForm.jsx
-│   │   │   ├── GoalsList.jsx
 │   │   │   ├── Header.jsx
 │   │   │   ├── Layout.jsx
 │   │   │   └── Sidebar.jsx
 │   │   ├── PageWrapper.jsx
+│   │   ├── ReviewQueue.jsx
+│   │   ├── StudyHistory.jsx
+│   │   ├── StudySession.jsx
 │   │   ├── TestAuth.jsx
 │   │   ├── Textarea.jsx
 │   │   ├── ToggleSwitch.jsx
@@ -47,6 +54,10 @@ client
 │   │   │   └── flashcardsSlice.js
 │   │   ├── goals
 │   │   │   └── goalsSlice.js
+│   │   ├── review
+│   │   │   └── flashcardReviewSlice.js
+│   │   ├── studySessions
+│   │   │   └── studySessionSlice.js
 │   │   └── user
 │   │       └── userSlice.js
 │   ├── hooks
@@ -67,11 +78,17 @@ client
 │   │   │   └── index.scss
 │   │   ├── components
 │   │   │   ├── _app.scss
+│   │   │   ├── _auth.scss
 │   │   │   ├── _backgroundstudy.scss
 │   │   │   ├── _buttons.scss
 │   │   │   ├── _deckcard.scss
 │   │   │   ├── _flashcardStudy.scss
+│   │   │   ├── _goalform.scss
+│   │   │   ├── _goalslist.scss
 │   │   │   ├── _input.scss
+│   │   │   ├── _reviewqueue.scss
+│   │   │   ├── _studyhistory.scss
+│   │   │   ├── _studysession.scss
 │   │   │   ├── _textarea.scss
 │   │   │   ├── _toggleswitch.scss
 │   │   │   ├── _uishowcase.scss
@@ -93,7 +110,8 @@ client
 │   │       ├── _variables.scss
 │   │       └── index.scss
 │   └── utils
+│       ├── calculateGoalTime.js
 │       └── helpers.js
 └── vite.config.js
 
-22 directories, 74 files
+24 directories, 90 files

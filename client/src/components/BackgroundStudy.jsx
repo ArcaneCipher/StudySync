@@ -1,35 +1,35 @@
-import { useEffect } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
-import { useParams } from 'react-router-dom';
-import { fetchDecks } from '../features/decks/decksSlice';
+import { useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { fetchDecks } from "../features/decks/decksSlice";
+import { fetchGoals } from "../features/goals/goalsSlice";
 
-const BackgroundStudy = () => {
-  const { deckId } = useParams();
+const BackgroundStudy = ({ deckId, goalId }) => {
   const dispatch = useDispatch();
 
-  const { decks, status } = useSelector(state => state.decks);
-  const deck = decks.find(d => d.id === Number(deckId));
+  const { decks, status: decksStatus } = useSelector((state) => state.decks);
+  const { goals, loading: goalsLoading } = useSelector((state) => state.goals);
 
-  // Fetch decks
+  const deck = decks.find((d) => d.id === Number(deckId));
+  const goal = goals.find((g) => g.id === Number(goalId));
 
   useEffect(() => {
-    if (status === 'idle') {
+    if (decksStatus === "idle") {
       dispatch(fetchDecks());
     }
-  }, [dispatch, status]);
-  
+  }, [dispatch, decksStatus]);
+
+  useEffect(() => {
+    if (goals.length === 0 && !goalsLoading) {
+      dispatch(fetchGoals());
+    }
+  }, [dispatch, goals.length, goalsLoading]);
+
+  const title = goal ? goal.title : deck ? deck.title : "Study Session";
+
   return (
-    <>
-      <div className='background-study'>
-        <h2>
-        {status === 'loading'
-          ? 'Loading...'
-          : deck
-          ? deck.title
-          : 'Deck not found'}
-        </h2>
-      </div> 
-    </>
+    <div className="background-study">
+      <h2>{title}</h2>
+    </div>
   );
 };
 

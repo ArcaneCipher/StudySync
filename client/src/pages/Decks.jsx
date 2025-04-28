@@ -1,30 +1,31 @@
-import { useEffect, useState } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
+import { useEffect, useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
 import {
   fetchDecks,
   createDeck,
   updateDeck,
   deleteDeck,
-} from '../features/decks/decksSlice';
+} from "../features/decks/decksSlice";
 
-import DeckCard from '../components/DeckCard';
-import Button from '../components/Button';
-import Input from '../components/Input';
-import Textarea from '../components/Textarea';
-import ToggleSwitch from '../components/ToggleSwitch';
-import { CirclePlus } from 'lucide-react';
+import DeckCard from "../components/DeckCard";
+import Button from "../components/Button";
+import Input from "../components/Input";
+import Textarea from "../components/Textarea";
+import ToggleSwitch from "../components/ToggleSwitch";
+import { CirclePlus } from "lucide-react";
 import { AnimatePresence, motion } from "framer-motion";
 
 const Decks = () => {
   const dispatch = useDispatch();
-  const { decks, status, error } = useSelector(state => state.decks);
+  const { decks, status, error } = useSelector((state) => state.decks);
+  const authUser = useSelector((state) => state.auth.user); // get logged in user
 
   // State for the new deck creation form
   const [newDeck, setNewDeck] = useState({
-    title: '',
-    description: '',
+    title: "",
+    description: "",
     is_public: false,
-    user_id: 1
+    user_id: 1,
   });
 
   // Toggle visibility of new deck creation form
@@ -33,22 +34,26 @@ const Decks = () => {
   // State to manage deck editing
   const [editingDeckId, setEditingDeckId] = useState(null);
   const [editForm, setEditForm] = useState({
-    title: '',
-    description: '',
-    is_public: false
+    title: "",
+    description: "",
+    is_public: false,
   });
 
-  // Fetch decks from the backend when component mounts
+  // Fetch decks based on logged in user (or all)
   useEffect(() => {
-    if (status === 'idle') {
+    if (authUser?.id) {
+      // If a user is logged in, fetch only their decks
+      dispatch(fetchDecks(authUser.id));
+    } else if (status === "idle") {
+      // If no user, fetch all decks (public browsing maybe)
       dispatch(fetchDecks());
     }
-  }, [dispatch, status]);
+  }, [dispatch, authUser]);
 
   // Create a new deck
   const handleCreate = () => {
     dispatch(createDeck(newDeck));
-    setNewDeck({ title: '', description: '', is_public: false, user_id: 1 });
+    setNewDeck({ title: "", description: "", is_public: false, user_id: 1 });
     setAddNewDeck(false);
   };
 
@@ -88,9 +93,10 @@ const Decks = () => {
       </div>
 
       {/* New deck creation form with animation */}
-      <AnimatePresence mode="wait">  
+      <AnimatePresence mode="wait">
         {addNewDeck && (
-          <motion.div className='deck-goal-create'
+          <motion.div
+            className="deck-goal-create"
             key="decks"
             initial={{ opacity: 0, y: -30 }}
             animate={{ opacity: 1, y: 0 }}
@@ -101,30 +107,36 @@ const Decks = () => {
             <Input
               type="text"
               value={newDeck.title}
-              onChange={(e) => setNewDeck({ ...newDeck, title: e.target.value })}
+              onChange={(e) =>
+                setNewDeck({ ...newDeck, title: e.target.value })
+              }
               label="Title"
             />
             <Textarea
               value={newDeck.description}
-              onChange={(e) => setNewDeck({ ...newDeck, description: e.target.value })}
+              onChange={(e) =>
+                setNewDeck({ ...newDeck, description: e.target.value })
+              }
               label="Description"
             />
-            <ToggleSwitch 
-              isPublic={newDeck.is_public}  
+            <ToggleSwitch
+              isPublic={newDeck.is_public}
               onChange={(newVal) =>
                 setNewDeck({ ...newDeck, is_public: newVal })
-              } 
+              }
             />
             <div className="btn-row mt20">
               <Button onClick={handleCreate}>Create Deck</Button>
-              <Button variant='secondary' onClick={handleNewDeck}>Cancel</Button>
+              <Button variant="secondary" onClick={handleNewDeck}>
+                Cancel
+              </Button>
             </div>
           </motion.div>
         )}
       </AnimatePresence>
 
       {/* Render loading or deck list */}
-      {status === 'loading' ? (
+      {status === "loading" ? (
         <p>Loading...</p>
       ) : (
         decks.map((deck) => (

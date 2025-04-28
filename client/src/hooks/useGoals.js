@@ -6,14 +6,16 @@ import {
   deleteGoal,
 } from "../features/goals/goalsSlice"; // Import AsyncThunks from goalsSlice
 
-// Custom hhok to handle goal-related actions and state
+// Custom hook to handle goal-related actions and state
 const useGoals = () => {
   const dispatch = useDispatch(); // Dispatch function to trigger Redux actions
   const { goals, loading, error } = useSelector((state) => state.goals); // Select goals state from Redux store
+  const authUser = useSelector((state) => state.auth.user);
 
-  // Function to fetch goals from the API
+  // Function to fetch goals (now accepts optional userId)
   const loadAllGoals = () => {
-    dispatch(fetchGoals()); // Dispatch the fetchGoals action
+    const userId = authUser?.id || null;
+    dispatch(fetchGoals(userId));
   };
 
   // Function to add a new goal

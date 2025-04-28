@@ -131,7 +131,8 @@ server
 │   │   ├── 20250413033320_create_media_uploads.rb
 │   │   ├── 20250413033326_create_challenges.rb
 │   │   ├── 20250413033336_create_user_challenges.rb
-│   │   └── 20250413033341_create_ai_requests.rb
+│   │   ├── 20250413033341_create_ai_requests.rb
+│   │   └── 20250428052243_add_deck_id_to_goals.rb
 │   ├── schema.rb
 │   └── seeds.rb
 ├── lib
@@ -139,4 +140,4 @@ server
 │       └── db.rake
 └── server_tree.txt
 
-31 directories, 108 files
+31 directories, 109 files

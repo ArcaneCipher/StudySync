@@ -45,19 +45,6 @@ puts "🌱 Creating additional users..."
   )
 end
 
-puts "🌱 Creating goals..."
-goals = users.flat_map do |user|
-  2.times.map do
-    Goal.create!(
-      user: user,
-      title: Faker::Educator.subject,
-      description: Faker::Lorem.sentence(word_count: 8),
-      target_hours: rand(10..50),
-      is_public: [true, false].sample
-    )
-  end
-end
-
 puts "🌱 Creating decks and flashcards..."
 decks = users.flat_map do |user|
   2.times.map do
@@ -70,7 +57,7 @@ decks = users.flat_map do |user|
 
     5.times do
       Flashcard.create!(
-        deck: deck,
+        deck_id: deck.id,
         front_text: Faker::Lorem.question,
         back_text: Faker::Lorem.sentence(word_count: 5),
         image_url: nil,
@@ -82,16 +69,55 @@ decks = users.flat_map do |user|
   end
 end
 
-puts "🌱 Creating study sessions..."
-goals.each do |goal|
-  2.times do
-    StudySession.create!(
-      user: goal.user,
-      goal: goal,
-      duration_min: rand(15..60),
-      notes: Faker::Lorem.sentence(word_count: 10)
-    )
-  end
+puts "🌱 Creating goals tied to decks..."
+goals = []
+
+decks.each do |deck|
+  # Goal 1: Completed Goal
+  complete_goal = Goal.create!(
+    user: deck.user,
+    deck_id: deck.id,
+    title: "Complete #{deck.title}",
+    description: "Complete all study hours for #{deck.title}",
+    target_hours: 10,
+    is_public: [true, false].sample
+  )
+  StudySession.create!(
+    user: deck.user,
+    goal: complete_goal,
+    duration_min: 600, # 10 hours completed
+    notes: "Completed full study goal!"
+  )
+  goals << complete_goal
+
+  # Goal 2: Partially Completed Goal
+  partial_goal = Goal.create!(
+    user: deck.user,
+    deck_id: deck.id,
+    title: "Work on #{deck.title}",
+    description: "Progress study goal for #{deck.title}",
+    target_hours: 10,
+    is_public: [true, false].sample
+  )
+  StudySession.create!(
+    user: deck.user,
+    goal: partial_goal,
+    duration_min: 240, # 4 hours done
+    notes: "Partial progress made."
+  )
+  goals << partial_goal
+
+  # Goal 3: Not Started Goal
+  new_goal = Goal.create!(
+    user: deck.user,
+    deck_id: deck.id,
+    title: "Start studying #{deck.title}",
+    description: "Begin studying #{deck.title}",
+    target_hours: 10,
+    is_public: [true, false].sample
+  )
+  # No study session yet — brand new goal
+  goals << new_goal
 end
 
 puts "✅ Seeding complete!"

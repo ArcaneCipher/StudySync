@@ -32,14 +32,16 @@ const Study = () => {
   }, [deckId, goalId]);
 
   if (!resolvedDeckId) {
-    return <p>Loading study session...</p>; // optional loading screen
+    return <p>Loading study session...</p>;
   }
 
   return (
     <div className="study-page">
-      <BackgroundStudy deckId={resolvedDeckId} />
-      <ForegroundStudy deckId={resolvedDeckId} />
-      <StudySession deckId={resolvedDeckId} />
+      <BackgroundStudy deckId={resolvedDeckId} goalId={goalId} />
+      <ForegroundStudy deckId={resolvedDeckId} goalId={goalId} />
+      {resolvedDeckId && (
+        <StudySession deckId={resolvedDeckId} goalId={goalId} />
+      )}
     </div>
   );
 };

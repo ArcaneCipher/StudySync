@@ -6,7 +6,7 @@ import { ArrowLeft } from "lucide-react";
 import FlashcardStudy from "./FlashcardStudy";
 import { motion } from "framer-motion";
 
-const ForegroundStudy = ({ deckId }) => {
+const ForegroundStudy = ({ deckId, goalId }) => {
   const dispatch = useDispatch();
   const session = useSelector((state) => state.studySession);
 

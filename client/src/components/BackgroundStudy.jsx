@@ -12,14 +12,12 @@ const BackgroundStudy = ({ deckId, goalId }) => {
   const deck = decks.find((d) => d.id === Number(deckId));
   const goal = goals.find((g) => g.id === Number(goalId));
 
-  // Fetch decks if needed
   useEffect(() => {
     if (decksStatus === "idle") {
       dispatch(fetchDecks());
     }
   }, [dispatch, decksStatus]);
 
-  // Fetch goals if needed
   useEffect(() => {
     if (goals.length === 0 && !goalsLoading) {
       dispatch(fetchGoals());

@@ -9,12 +9,14 @@ module Api
   module V1
     class GoalsController < ApplicationController
       # GET /api/v1/goals or /api/v1/goals?user_id=1
-      # Returns all goals or goals belonging to a specific user
+      # Returns goals based on user_id (or only public goals if no user)
       def index
         @goals = if params[:user_id]
-          Goal.where(user_id: params[:user_id])
+          # Logged in user: get their own goals + all public goals
+          Goal.where("user_id = ? OR is_public = ?", params[:user_id], true)
         else
-          Goal.all
+          # No user logged in: show only public goals
+          Goal.where(is_public: true)
         end
 
         render :index, formats: :json

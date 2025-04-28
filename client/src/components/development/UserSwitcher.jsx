@@ -50,7 +50,7 @@ const DevUserSwitcher = ({toggleCollapse}) => {
       <p style={{ fontSize: "0.75rem", marginBottom: "0.5rem" }}>
         <strong>Switch User (Dev)</strong>
       </p>
-      <p style={{ fontSize: "0.75rem", marginBottom: "0.5rem", color: "#555" }}>
+      <p style={{ fontSize: "0.75rem", marginBottom: "0.5rem"}}>
         Logged in as: <strong>{user?.username || "None"}</strong>
       </p>
       {demoUsers.map((demoUser) => (

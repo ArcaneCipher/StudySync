@@ -12,10 +12,10 @@ module Api
       # Returns goals based on user_id (or only public goals if no user)
       def index
         @goals = if params[:user_id]
-          # Logged in user: get their own goals + all public goals
-          Goal.where("user_id = ? OR is_public = ?", params[:user_id], true)
+          # Logged in: show all goals belonging to that user (private or public)
+          Goal.where(user_id: params[:user_id])
         else
-          # No user logged in: show only public goals
+          # Not logged in: show only public goals
           Goal.where(is_public: true)
         end
 

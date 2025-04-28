@@ -1,11 +1,7 @@
 import axios from "./axios"; // Configured axios instance
 
 // GET all goals, optionally by user ID
-export const getGoals = async (userId = null) => {
-  let url = "/api/v1/goals"; // Make a GET request to fetch all goals
-  if (userId) {
-    url += `?user_id=${userId}`;
-  }
+export const getGoals = async (url = "/api/v1/goals") => {
   const response = await axios.get(url);
   return response.data; // Return the data from the response
 };

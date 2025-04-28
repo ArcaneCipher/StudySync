@@ -11,8 +11,11 @@ import {
 export const fetchGoals = createAsyncThunk(
   "goals/fetchGoals",
   async (userId = null) => {
-    // accept optional userId
-    const response = await getGoals(userId); // Call the API to get goals
+    let url = "/api/v1/goals";
+    if (userId) {
+      url += `?user_id=${userId}`;
+    } // accept optional userId
+    const response = await getGoals(url); // Call the API to get goals
     return response; // Return the response to store in Redux state
   }
 );

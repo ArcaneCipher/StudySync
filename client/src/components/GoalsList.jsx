@@ -8,6 +8,7 @@ import { CirclePlus, CircleX, SquarePen, Trash2 } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion"; // Import motion and AnimatePresence for animations
 import { calculateGoalTime } from "../utils/calculateGoalTime"; // Utility function to calculate goal time
 import "../styles/components/_goalslist.scss"; // Import styles for the GoalsList component
+import { useNavigate } from "react-router-dom";
 
 const GoalsList = () => {
   const {
@@ -20,6 +21,7 @@ const GoalsList = () => {
     removeGoal,
   } = useGoals(); // Custom hook to manage goals
 
+  const navigate = useNavigate();
   const [formVisible, setFormVisible] = useState(false); // State to manage the visibility of the form
   const [editingGoal, setEditingGoal] = useState(null); // State to manage the goal being edited
   const authUser = useSelector((state) => state.auth.user); // Grab logged in user
@@ -152,6 +154,12 @@ const GoalsList = () => {
                 {/* Extra delete icon for non-mobile usage */}
                 <CircleX onClick={() => removeGoal(goal.id)} />
                 <div className="edit-overlay">
+                  <Button
+                    variant="primary"
+                    onClick={() => navigate(`/study/goal/${goal.id}`)}
+                  >
+                    Study Goal
+                  </Button>
                   <SquarePen onClick={() => handleEditClick(goal)} />
                   <Trash2 onClick={() => removeGoal(goal.id)} />
                 </div>

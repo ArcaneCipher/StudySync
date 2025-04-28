@@ -11,9 +11,9 @@ const useGoals = () => {
   const dispatch = useDispatch(); // Dispatch function to trigger Redux actions
   const { goals, loading, error } = useSelector((state) => state.goals); // Select goals state from Redux store
 
-  // Function to fetch goals from the API
-  const loadAllGoals = () => {
-    dispatch(fetchGoals()); // Dispatch the fetchGoals action
+  // Function to fetch goals (now accepts optional userId)
+  const loadAllGoals = (userId = null) => {
+    dispatch(fetchGoals(userId));
   };
 
   // Function to add a new goal

@@ -4,6 +4,7 @@ import { fetchFlashcards } from "../features/flashcards/flashcardsSlice";
 import { useNavigate } from "react-router-dom";
 import { ArrowLeft } from "lucide-react";
 import FlashcardStudy from "./FlashcardStudy";
+import StudySession from "./StudySession";
 import { motion } from "framer-motion";
 import Button from "./Button";
 
@@ -66,14 +67,12 @@ const ForegroundStudy = ({ deckId, goalId, from}) => {
 
   return (
     <div className="foreground-study">
-      {/* {session.endTime && ( */}
-        {/* <Link className="flex align-items-center gap10 mb1" to="/decks">
-          <ArrowLeft /> Back
-        </Link> */}
+      {session.endTime && ( 
         <Button className="flex align-items-center gap10 mb1 p0" onClick={handleBack} variant="ghost">
           <ArrowLeft /> Back
         </Button>
-      {/* )} */}
+     )}
+        <StudySession deckId={deckId} goalId={goalId} />
       {isSessionActive && (
         <div>
           {isLoading ? (

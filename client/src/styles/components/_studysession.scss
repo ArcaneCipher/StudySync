@@ -1,3 +1,4 @@
+@use '../utils/variables' as *;
 .start-session {
   position: absolute;
   width: 100%;
@@ -48,7 +49,7 @@
     top: 50%;
     transform: translateY(-50%);
     z-index: 14;
-    background: #fff;
+    background: $whitebg;
     padding: 20px;
     border-radius: 1rem;
     margin: 0 auto;
@@ -56,7 +57,7 @@
       position: absolute;
       right: -10px;
       top: -10px;
-      background: #fff;
+      background: $whitebg;
       border-radius: 50%;
       cursor: pointer;
     }

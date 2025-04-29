@@ -31,6 +31,8 @@ const StudySession = ({ deckId, goalId }) => {
   // Local state for note input and modal toggle
   const [noteInput, setNoteInput] = useState("");
   const [isNote, setIsNote] = useState(false);
+  const [showSummary, setShowSummary] = useState(false);
+
 
   // Local state to track session start timestamp (for manual duration calculation)
   const [startTimestamp, setStartTimestamp] = useState(null);
@@ -44,25 +46,34 @@ const StudySession = ({ deckId, goalId }) => {
   */
 
   // ✅ Correct initialization: Start a session once the deckId (and optionally goalId) are known
-  useEffect(() => {
-    if (deckId) {
-      console.log(
-        "Initializing session with deckId:",
-        deckId,
-        "and goalId:",
-        goalId
-      );
-      dispatch(startSession({ deckId, goalId }));
-    }
-  }, [deckId, goalId, dispatch]);
+  // useEffect(() => {
+  //   if (deckId) {
+  //     console.log(
+  //       "Initializing session with deckId:",
+  //       deckId,
+  //       "and goalId:",
+  //       goalId
+  //     );
+  //     dispatch(startSession({ deckId, goalId }));
+  //   }
+  // }, [deckId, goalId, dispatch]);
 
   // Debugging - optional, to track session changes
+
+  useEffect(() => {
+    // Reset on deck change (optional if auto-start is removed)
+    dispatch(resetSession());
+    setShowSummary(false);
+  }, [deckId]);
+
+  
   useEffect(() => {
     console.log("Current session state:", session);
   }, [session]);
 
   // Handler to manually start session if needed (usually not triggered because auto-start happens)
   const handleStart = () => {
+    console.log(goalId)
     console.log("Manual Start clicked. Deck ID:", deckId, "Goal ID:", goalId);
     dispatch(startSession({ deckId, goalId }));
     setStartTimestamp(Date.now());
@@ -93,8 +104,12 @@ const StudySession = ({ deckId, goalId }) => {
     // Clear local timestamp
     setStartTimestamp(null);
 
-    // Schedule full reset AFTER a delay, so user sees summary (120 seconds)
-    setTimeout(() => dispatch(resetSession()), 120000);
+    setShowSummary(true); // show summary after session ends
+    // Schedule full reset AFTER a delay, so user sees summary (60 seconds)
+    setTimeout(() => {
+      dispatch(resetSession());
+      setShowSummary(false); // hide summary after 60s
+    }, 60000);
   };
 
   // Track textarea input for session notes
@@ -125,7 +140,7 @@ const StudySession = ({ deckId, goalId }) => {
         Display "Start Session" button if no session is active.
         Otherwise show the active session UI.
       */}
-      {!session.startTime ? (
+    {!session.startTime && !showSummary ? (
         <Button variant="primary" onClick={handleStart}>
           Start Study Session
         </Button>
@@ -169,9 +184,12 @@ const StudySession = ({ deckId, goalId }) => {
             End Study Session
           </Button>
         </>
-      ) : (
-        ""
-      )}
+      )  : showSummary ? (
+        <p className='session-lasted'>
+          Session lasted {session.durationMin} minute{session.durationMin !== 1 ? "s" : ""}
+        </p>
+      ) : null}
+
 
       {/* Animate background blur if notes modal open */}
       {isNote && (

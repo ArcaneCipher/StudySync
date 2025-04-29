@@ -1,16 +1,7 @@
-# This file should ensure the existence of records required to run the application in every environment (production,
-# development, test). The code here should be idempotent so that it can be executed at any point in every environment.
-# The data can then be loaded with the bin/rails db:seed command (or created alongside the database with db:setup).
-#
-# Example:
-#
-#   ["Action", "Comedy", "Drama", "Horror"].each do |genre_name|
-#     MovieGenre.find_or_create_by!(name: genre_name)
-#   end
-
+# db/seeds.rb
 require "faker"
 
-puts "🌱 Clearing existing data..."
+puts "\u2728 Clearing existing data..."
 User.destroy_all
 UserSetting.destroy_all
 Goal.destroy_all
@@ -19,7 +10,7 @@ Flashcard.destroy_all
 FlashcardReview.destroy_all
 StudySession.destroy_all
 
-puts "🌱 Creating demo users..."
+puts "\u2728 Creating demo users..."
 demo_users = [
   {email: "alice@studysync.com", username: "AliceDemo"},
   {email: "bob@studysync.com", username: "BobDemo"},
@@ -35,7 +26,6 @@ users = demo_users.map do |user_data|
   )
 end
 
-puts "🌱 Creating additional users..."
 3.times do
   users << User.create!(
     email: Faker::Internet.unique.email,
@@ -45,79 +35,163 @@ puts "🌱 Creating additional users..."
   )
 end
 
-puts "🌱 Creating decks and flashcards..."
-decks = users.flat_map do |user|
-  2.times.map do
+puts "\u2728 Preparing subject pools..."
+subject_pools = {
+  biology: [
+    ["What is the powerhouse of the cell?", "The mitochondria."],
+    ["What carries genetic information?", "DNA."],
+    ["What process turns sunlight into energy?", "Photosynthesis."],
+    ["What is the basic unit of life?", "The cell."],
+    ["What part of the cell contains the nucleus?", "The cytoplasm."]
+  ],
+  history: [
+    ["Who was the first President of the USA?", "George Washington."],
+    ["In what year did WW2 end?", "1945."],
+    ["What empire built the Colosseum?", "The Roman Empire."],
+    ["Who wrote the Declaration of Independence?", "Thomas Jefferson."],
+    ["What wall fell in 1989?", "The Berlin Wall."]
+  ],
+  math: [
+    ["What is the value of Pi approximately?", "3.1416."],
+    ["What is 8 x 7?", "56."],
+    ["What is the square root of 64?", "8."],
+    ["Solve for x: 2x = 10", "x = 5."],
+    ["What is an angle greater than 90 degrees called?", "Obtuse."]
+  ],
+  geography: [
+    ["What is the longest river in the world?", "The Nile."],
+    ["What continent is Egypt in?", "Africa."],
+    ["What is the capital of Japan?", "Tokyo."],
+    ["Where are the Andes mountains located?", "South America."],
+    ["Which ocean is the largest?", "The Pacific Ocean."]
+  ],
+  physics: [
+    ["Who developed the theory of relativity?", "Albert Einstein."],
+    ["What force keeps us on the ground?", "Gravity."],
+    ["What is the unit of electrical resistance?", "Ohm."],
+    ["What is the speed of light?", "Approximately 300,000 km/s."],
+    ["What device measures force?", "A spring scale."]
+  ],
+  chemistry: [
+    ["What is H2O?", "Water."],
+    ["What gas do plants absorb?", "Carbon Dioxide (CO2)."],
+    ["What is the periodic table used for?", "Organizing elements."],
+    ["What is NaCl?", "Salt."],
+    ["What element has the atomic number 1?", "Hydrogen."]
+  ],
+  computer_science: [
+    ["What does HTML stand for?", "HyperText Markup Language."],
+    ["What is the brain of the computer?", "The CPU."],
+    ["What does 'HTTP' stand for?", "HyperText Transfer Protocol."],
+    ["What language is used for web styling?", "CSS."],
+    ["What does API stand for?", "Application Programming Interface."]
+  ],
+  literature: [
+    ["Who wrote 'Romeo and Juliet'?", "William Shakespeare."],
+    ["What is the opposite of prose?", "Poetry."],
+    ["Who is the author of '1984'?", "George Orwell."],
+    ["What is a haiku?", "A 3-line poem with 5-7-5 syllables."],
+    ["What genre is 'The Hobbit'?", "Fantasy."]
+  ],
+  art: [
+    ["Who painted the Mona Lisa?", "Leonardo da Vinci."],
+    ["What are the primary colors?", "Red, blue, yellow."],
+    ["Who painted 'Starry Night'?", "Vincent van Gogh."],
+    ["What is a sculpture made of stone called?", "A carving."],
+    ["What technique uses tiny dots to form an image?", "Pointillism."]
+  ],
+  music: [
+    ["How many notes in a musical scale?", "Seven."],
+    ["What instrument has 88 keys?", "Piano."],
+    ["Who composed 'Fur Elise'?", "Beethoven."],
+    ["What is the symbol for a sharp note?", "#."],
+    ["What does 'forte' mean in music?", "Play loudly."]
+  ]
+}
+
+subjects = subject_pools.keys
+
+decks = []
+
+puts "\u2728 Creating decks, flashcards, and goals..."
+users.each do |user|
+  2.times do
+    subject = subjects.sample
     deck = Deck.create!(
       user: user,
       title: Faker::Educator.course_name,
-      description: Faker::Lorem.sentence(word_count: 6),
+      description: "Flashcards for studying #{subject.to_s.humanize}.",
       is_public: [true, false].sample
     )
 
-    5.times do
+    sampled_cards = subject_pools[subject].sample(5)
+    sampled_cards.each do |front, back|
       Flashcard.create!(
         deck_id: deck.id,
-        front_text: Faker::Lorem.question,
-        back_text: Faker::Lorem.sentence(word_count: 5),
-        image_url: nil,
-        audio_url: nil
+        front_text: front,
+        back_text: back
       )
     end
 
-    deck
+    # Create 3 goals per deck
+    goals = []
+    goals << Goal.create!(
+      user: user,
+      deck_id: deck.id,
+      title: "Master #{deck.title}",
+      description: "Complete all sessions for #{deck.title}.",
+      target_hours: 10,
+      is_public: [true, false].sample
+    )
+
+    goals << Goal.create!(
+      user: user,
+      deck_id: deck.id,
+      title: "Progress #{deck.title}",
+      description: "Partial study sessions for #{deck.title}.",
+      target_hours: 10,
+      is_public: [true, false].sample
+    )
+
+    goals << Goal.create!(
+      user: user,
+      deck_id: deck.id,
+      title: "Start #{deck.title}",
+      description: "Start sessions for #{deck.title}.",
+      target_hours: 10,
+      is_public: [true, false].sample
+    )
+
+    # Seed study sessions for 2 goals
+    StudySession.create!(
+      user: user,
+      goal: goals.first,
+      duration_min: 600,
+      notes: "Completed full study goal."
+    )
+
+    StudySession.create!(
+      user: user,
+      goal: goals.second,
+      duration_min: 240,
+      notes: "Partial progress made."
+    )
+
+    decks << deck
   end
 end
 
-puts "🌱 Creating goals tied to decks..."
-goals = []
-
-decks.each do |deck|
-  # Goal 1: Completed Goal
-  complete_goal = Goal.create!(
-    user: deck.user,
-    deck_id: deck.id,
-    title: "Complete #{deck.title}",
-    description: "Complete all study hours for #{deck.title}",
-    target_hours: 10,
-    is_public: [true, false].sample
-  )
-  StudySession.create!(
-    user: deck.user,
-    goal: complete_goal,
-    duration_min: 600, # 10 hours completed
-    notes: "Completed full study goal!"
-  )
-  goals << complete_goal
-
-  # Goal 2: Partially Completed Goal
-  partial_goal = Goal.create!(
-    user: deck.user,
-    deck_id: deck.id,
-    title: "Work on #{deck.title}",
-    description: "Progress study goal for #{deck.title}",
-    target_hours: 10,
-    is_public: [true, false].sample
-  )
-  StudySession.create!(
-    user: deck.user,
-    goal: partial_goal,
-    duration_min: 240, # 4 hours done
-    notes: "Partial progress made."
-  )
-  goals << partial_goal
-
-  # Goal 3: Not Started Goal
-  new_goal = Goal.create!(
-    user: deck.user,
-    deck_id: deck.id,
-    title: "Start studying #{deck.title}",
-    description: "Begin studying #{deck.title}",
-    target_hours: 10,
-    is_public: [true, false].sample
-  )
-  # No study session yet — brand new goal
-  goals << new_goal
+puts "\u2728 (Optional) Creating flashcard reviews..."
+Flashcard.all.each do |flashcard|
+  if [true, false].sample
+    FlashcardReview.create!(
+      user: flashcard.deck.user,
+      flashcard: flashcard,
+      ease_rating: [1, 2, 3].sample,
+      next_due: Date.today + rand(1..7).days,
+      reviewed_at: DateTime.now
+    )
+  end
 end
 
-puts "✅ Seeding complete!"
+puts "\u2705 Seeding complete!"

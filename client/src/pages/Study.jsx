@@ -42,9 +42,9 @@ const Study = () => {
     <div className="study-page">
       <BackgroundStudy deckId={resolvedDeckId} goalId={goalId} />
       <ForegroundStudy deckId={resolvedDeckId} goalId={goalId} from={from}/>
-      {resolvedDeckId && (
+      {/* {resolvedDeckId && (
         <StudySession deckId={resolvedDeckId} goalId={goalId} />
-      )}
+      )} */}
     </div>
   );
 };
